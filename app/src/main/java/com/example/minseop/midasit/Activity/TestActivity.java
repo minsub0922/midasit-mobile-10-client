@@ -1,8 +1,7 @@
 package com.example.minseop.midasit.Activity;
 
-import android.content.Intent;
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
 import com.example.minseop.midasit.R;
 
@@ -10,11 +9,12 @@ import com.example.minseop.midasit.R;
  * Created by minseop on 2018-05-25.
  */
 
-public class MainActivity extends AppCompatActivity {
+public class TestActivity extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        startActivity(new Intent(MainActivity.this, TestActivity.class));
+        setContentView(R.layout.activity_test);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setTitle("Test!");
     }
 }

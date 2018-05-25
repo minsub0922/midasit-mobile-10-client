@@ -27,7 +27,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
-    private static final String BASE = "http://172.30.1.229:3001";
+    private static final String BASE = "192.168.0.13:3001";
 
     Button btn_login;
     TextView txt_info, txt_signup;
@@ -50,6 +50,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View view) {
+        startActivity(new Intent(LoginActivity.this, TestActivity.class));
         if (view.getId()==R.id.btn_login) {
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(BASE)

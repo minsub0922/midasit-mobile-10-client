@@ -22,6 +22,8 @@
         </activity>
         <activity android:name=".Activity.MainActivity"/>
         <activity android:name=".Activity.SignupActivity"/>
+        <activity android:name=".Activity.TestActivity"
+            android:theme="@style/Base.Widget.AppCompat.ActionBar.Custom"/>
     </application>
 
 </manifest>
