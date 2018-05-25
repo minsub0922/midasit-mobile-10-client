@@ -32,6 +32,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     Button btn_login;
     TextView txt_info, txt_signup;
     EditText edt_id, edt_pw;
+    String id = null,pwd = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,12 +97,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (requestCode == 1) {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
-                String id=data.getStringExtra("userid");
-                String pwd= data.getStringExtra("password");
-                edt_id.setText(id,TextView.BufferType.EDITABLE);
-                edt_pw.setText(pwd,TextView.BufferType.EDITABLE);
+                id=data.getStringExtra("userid");
+                pwd= data.getStringExtra("password");
                 txt_info.setText("회원가입 성공적");
             }
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(id != null && pwd != null)
+        {
+            edt_id.setText(id,TextView.BufferType.EDITABLE);
+            edt_pw.setText(pwd,TextView.BufferType.EDITABLE);
         }
     }
 }
