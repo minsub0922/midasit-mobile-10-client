@@ -22,10 +22,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.admin.DetailedMenuManagementActivity"/>
         <activity android:name=".ui.customer.CustomerMainActivity" />
         <activity android:name=".ui.customer.MenuDetailActivity" />
         <activity android:name=".ui.customer.OrderActivity" />
         <activity android:name=".ui.admin.AdminMainActivity"></activity>
+        <activity android:name=".ui.admin.TextUpdateActivity"/>
     </application>
 
 </manifest>

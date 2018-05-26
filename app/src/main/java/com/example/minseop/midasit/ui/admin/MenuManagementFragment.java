@@ -1,8 +1,10 @@
 package com.example.minseop.midasit.ui.admin;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.minseop.midasit.MidasCafeConstants;
@@ -34,6 +37,9 @@ public class MenuManagementFragment extends Fragment {
 
     private static final String TAG = MenuManagementFragment.class.getSimpleName();
 
+    private FloatingActionButton faAddMenu;
+    private ScrollView scrollView;
+
     private MenuItemManagementRecyclerAdapter coffeeMenuListAdapter;
     private RecyclerView coffeeMenuRecyclerView;
 
@@ -54,6 +60,19 @@ public class MenuManagementFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_menu_management, container, false);
 
+        faAddMenu = (FloatingActionButton) view.findViewById(R.id.admin_menu_management_add_button);
+        scrollView = view.findViewById(R.id.scv_menu_management);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            scrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+                @Override
+                public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                    if (scrollY-oldScrollY > 0 && faAddMenu.getVisibility()==View.VISIBLE) faAddMenu.hide();
+                    else if (scrollY-oldScrollY < 0 && faAddMenu.getVisibility()!=View.VISIBLE) faAddMenu.show();
+                }
+            });
+        }
+
         txt_title1 = view.findViewById(R.id.txt_title1);
         txt_title2 = view.findViewById(R.id.txt_title2);
         txt_title3 = view.findViewById(R.id.txt_title3);
@@ -73,6 +92,12 @@ public class MenuManagementFragment extends Fragment {
                 }else{
                     coffeeMenuRecyclerView.setVisibility(View.VISIBLE);
                 }
+            }
+        });
+        coffeeMenuRecyclerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
 
