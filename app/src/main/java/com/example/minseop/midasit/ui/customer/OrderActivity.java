@@ -11,10 +11,12 @@ import android.widget.Switch;
 
 import com.example.minseop.midasit.MidasCafeConstants;
 import com.example.minseop.midasit.R;
-import com.example.minseop.midasit.model.ShoppingCartModel;
+import com.example.minseop.midasit.model.ShoppingCartItem;
 import com.example.minseop.midasit.retrofit.ShoppingCartService;
 
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -31,10 +33,9 @@ public class OrderActivity extends AppCompatActivity {
     private Button payNowButton;
     private Button storeShooppingButton;
     private int size = 0;//tall = 0, grande = 1, venti = 2
-    boolean ice = false;
-    boolean syrup = false;
-    boolean cream = false;
-
+    private boolean ice = false;
+    private boolean syrup = false;
+    private boolean whipping = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,13 +69,25 @@ public class OrderActivity extends AppCompatActivity {
                         .build();
                 final ShoppingCartService ShoppingService = retrofit.create(ShoppingCartService.class);
 
-                ShoppingCartModel shoppingCartModel = new ShoppingCartModel();
-                shoppingCartModel.setSize(size);
-                shoppingCartModel.setCream(cream);
-                shoppingCartModel.setIce(ice);
-                shoppingCartModel.setSyrup(syrup);
-                final Call<ShoppingCartModel> ShoppingListCall = ShoppingService.add(shoppingCartModel);
-                //enqueue
+                ShoppingCartItem tmpshoppingCartItem = new ShoppingCartItem();
+                //tmpshoppingCartItem.setMenuId(menuId);
+                tmpshoppingCartItem.setSize(size);
+                tmpshoppingCartItem.setWhipping(whipping);
+                tmpshoppingCartItem.setIce(ice);
+                tmpshoppingCartItem.setSyrup(syrup);
+              /* final Call<ShoppingCartItem> ShoppingListCall = ShoppingService.addShoppingCartItem(userId,tmpshoppingCartItem);
+                ShoppingListCall.enqueue(new Callback<ShoppingCartItem>() {
+                    @Override
+                    public void onResponse(Call<ShoppingCartItem> call, Response<ShoppingCartItem> response) {
+                        final ShoppingCartItem shoppingCartItem1 = response.body();
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ShoppingCartItem> call, Throwable t) {
+
+                    }
+                });*/
 
 
             }
@@ -166,9 +179,9 @@ public class OrderActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton button, boolean isChecked) {
                 // TODO(@gihwan)
                 if (isChecked) {
-                    cream = true;
+                    whipping = true;
                 } else {
-                    cream = false;
+                    whipping= false;
                 }
             }
         });
