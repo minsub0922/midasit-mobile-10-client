@@ -14,10 +14,10 @@ import android.view.ViewGroup;
 
 import com.example.minseop.midasit.MidasCafeConstants;
 import com.example.minseop.midasit.R;
-import com.example.minseop.midasit.model.UserResponseModel;
+import com.example.minseop.midasit.model.Account;
+import com.example.minseop.midasit.model.AccountResponse;
 import com.example.minseop.midasit.retrofit.AccountManagementService;
 import com.example.minseop.midasit.ui.adapter.UserRecyclerAdapter;
-import com.example.minseop.midasit.user.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +36,7 @@ public class UserManagementFragment extends Fragment {
     private RecyclerView.Adapter adapter;
     private FloatingActionButton addButton;
 
-    private final List<User> users = new ArrayList<>();
+    private final List<Account> users = new ArrayList<>();
 
     @Nullable
     @Override
@@ -58,23 +58,23 @@ public class UserManagementFragment extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         retrofit.create(AccountManagementService.class)
-                .getAllCustomers()
-                .enqueue(new Callback<UserResponseModel>() {
+                .getAllAccounts()
+                .enqueue(new Callback<AccountResponse>() {
                     @Override
-                    public void onResponse(@NonNull Call<UserResponseModel> call, @NonNull Response<UserResponseModel> response) {
+                    public void onResponse(@NonNull Call<AccountResponse> call, @NonNull Response<AccountResponse> response) {
                         Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
-                        final UserResponseModel userResponse = response.body();
-                        if (userResponse == null) {
-                            // TODO(@gihwa)
+                        final AccountResponse accountResponse = response.body();
+                        if (accountResponse == null) {
+                            // TODO(@gihwan)
                         } else {
                             users.clear();
-                            users.addAll(userResponse.getAccounts());
+                            users.addAll(accountResponse.getAccounts());
                             adapter.notifyDataSetChanged();
                         }
                     }
 
                     @Override
-                    public void onFailure(@NonNull Call<UserResponseModel> call, @NonNull Throwable t) {
+                    public void onFailure(@NonNull Call<AccountResponse> call, @NonNull Throwable t) {
                         // TODO(@gihwan)
                         Log.d(TAG, "onFailure() called with: call = [" + call + "], t = [" + t + "]");
                     }

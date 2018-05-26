@@ -8,16 +8,16 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.minseop.midasit.R;
-import com.example.minseop.midasit.user.User;
+import com.example.minseop.midasit.model.Account;
 
 import java.util.List;
 
 public class UserRecyclerAdapter extends RecyclerView.Adapter<UserRecyclerAdapter.UserRecyclerViewHolder> {
 
-    private final List<User> users;
+    private final List<Account> accounts;
 
-    public UserRecyclerAdapter(@NonNull List<User> users) {
-        this.users = users;
+    public UserRecyclerAdapter(@NonNull List<Account> accounts) {
+        this.accounts = accounts;
     }
 
     @NonNull
@@ -30,15 +30,15 @@ public class UserRecyclerAdapter extends RecyclerView.Adapter<UserRecyclerAdapte
 
     @Override
     public void onBindViewHolder(@NonNull UserRecyclerViewHolder holder, int position) {
-        final User user = users.get(position);
+        final Account account = accounts.get(position);
 
-        holder.username.setText(user.getUsername());
-        holder.employeeNumber.setText(user.getEmployeeNumber());
+        holder.username.setText(account.getUsername());
+        holder.employeeNumber.setText(account.getEmployeeNumber());
     }
 
     @Override
     public int getItemCount() {
-        return users.size();
+        return accounts.size();
     }
 
     static class UserRecyclerViewHolder extends RecyclerView.ViewHolder {
