@@ -41,6 +41,7 @@ public class CustomerHomeFragment extends Fragment {
         modelList.add(new HomeAdModel("HiHI", "특별 할인 중 !!"));
         modelList.add(new HomeAdModel("HiHI", "특별 할인 중 !!"));
         modelList.add(new HomeAdModel("HiHI", "특별 할인 중 !!"));
+        modelList.add(new HomeAdModel("HiHI", "특별 할인 중 !!"));
         adapter.notifyDataSetChanged();
 
         return view;
