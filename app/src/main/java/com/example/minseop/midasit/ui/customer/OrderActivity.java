@@ -3,6 +3,7 @@ package com.example.minseop.midasit.ui.customer;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -41,18 +42,36 @@ public class OrderActivity extends AppCompatActivity {
     private boolean syrup = false;
     private boolean whipping = false;
     private static final String TAG = OrderActivity.class.getSimpleName();
+    private String name, price;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
+
+        name = getIntent().getStringExtra("name");
+        price = getIntent().getStringExtra("price");
+
         setupItemImage();
         setupSizeButtons();
         setupIceSwitch();
         setupSyrupSwitch();
         setupWhippingSwitch();
         setupButtons();
+        setupAppBar();
     }
+
+    private void setupAppBar() {
+        Toolbar toolbar = findViewById(R.id.order_toolbar);
+        setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle(name+"주문");
+        }
+    }
+
 
     private void setupButtons() {
         payNowButton = findViewById(R.id.order_pay_now_button);

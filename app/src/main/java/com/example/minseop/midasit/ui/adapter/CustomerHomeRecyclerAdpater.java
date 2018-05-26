@@ -34,7 +34,7 @@ public class CustomerHomeRecyclerAdpater extends RecyclerView.Adapter<CustomerHo
     public void onBindViewHolder(@NonNull CustomerHomeViewHolder holder, int position) {
         final HomeAdModel model = modelList.get(position);
         holder.text.setText(model.getText());
-        holder.menuImage.setImageDrawable(holder.itemView.getResources().getDrawable(R.drawable.ic_launcher_foreground));
+        holder.menuImage.setImageDrawable(holder.itemView.getResources().getDrawable(R.drawable.promotion));
     }
 
     @Override

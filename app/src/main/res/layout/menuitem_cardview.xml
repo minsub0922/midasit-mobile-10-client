@@ -17,6 +17,8 @@
 
         <ImageView
             android:id="@+id/menuitem_card_image"
+            android:src="@drawable/capuchino"
+            android:scaleType="fitXY"
             android:layout_width="128dp"
             android:layout_height="128dp"
             app:layout_constraintBottom_toTopOf="@id/menuitem_card_name"

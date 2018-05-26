@@ -1,6 +1,7 @@
 package com.example.minseop.midasit.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.minseop.midasit.R;
 import com.example.minseop.midasit.model.MenuModel;
+import com.example.minseop.midasit.ui.customer.OrderActivity;
 
 import java.util.List;
 
@@ -50,7 +52,10 @@ public class MenuItemRecyclerAdapter extends RecyclerView.Adapter<MenuItemRecycl
         holder.cardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, item.getName(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, OrderActivity.class);
+                intent.putExtra("name",item.getName());
+                intent.putExtra("price",String.valueOf(item.getPrice()));
+                context.startActivity(intent);
             }
         });
     }

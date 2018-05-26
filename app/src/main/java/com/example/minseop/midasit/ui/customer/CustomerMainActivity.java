@@ -30,7 +30,7 @@ public class CustomerMainActivity extends AppCompatActivity {
         setupAppBar();
         setupBottomNavigation();
 
-        replaceViewPager(new MenuListFragment());
+        replaceViewPager(new CustomerHomeFragment());
     }
 
     @Override
