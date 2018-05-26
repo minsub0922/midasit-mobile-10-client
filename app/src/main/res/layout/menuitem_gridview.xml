@@ -1,42 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/card_vertical_margin"
     android:layout_marginEnd="@dimen/card_horizontal_margin"
     android:layout_marginStart="@dimen/card_horizontal_margin"
     android:layout_marginTop="@dimen/card_vertical_margin"
-    android:background="@color/colorCards"
-    card_view:cardBackgroundColor="@color/colorCards"
-    card_view:cardCornerRadius="@dimen/card_radius">
+    app:cardBackgroundColor="@color/colorCards"
+    app:cardCornerRadius="@dimen/card_radius">
 
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:padding="@dimen/activity_margin_narrow">
 
         <ImageView
             android:id="@+id/menuitem_grid_image"
-            android:layout_width="match_parent"
-            android:layout_height="90dp"
-            android:layout_marginBottom="5dp" />
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/menuitem_grid_name"
+            app:layout_constraintDimensionRatio="H,21:9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/menuitem_grid_title"
-            android:layout_width="match_parent"
+            android:id="@+id/menuitem_grid_name"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_margin_narrow"
             android:textAlignment="center"
             android:textColor="@color/textColorDarkPrimary"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@id/menuitem_grid_price"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/menuitem_grid_image" />
 
         <TextView
             android:id="@+id/menuitem_grid_price"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_margin_narrow"
             android:textAlignment="center"
             android:textColor="@color/textColorDarkSecondary"
-            android:textSize="12sp" />
-    </LinearLayout>
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/menuitem_grid_name" />
+
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.v7.widget.CardView>

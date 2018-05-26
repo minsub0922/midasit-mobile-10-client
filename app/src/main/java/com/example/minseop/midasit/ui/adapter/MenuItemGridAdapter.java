@@ -66,7 +66,7 @@ public class MenuItemGridAdapter extends RecyclerView.Adapter<MenuItemGridAdapte
         public MenuItemViewHolder(View itemView) {
             super(itemView);
             image = (ImageView) itemView.findViewById(R.id.menuitem_grid_image);
-            title = (TextView) itemView.findViewById(R.id.menuitem_grid_title);
+            title = (TextView) itemView.findViewById(R.id.menuitem_grid_name);
             price = itemView.findViewById(R.id.menuitem_grid_price);
         }
     }
