@@ -11,6 +11,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -27,15 +28,29 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.minseop.midasit.MidasCafeConstants;
 import com.example.minseop.midasit.R;
+import com.example.minseop.midasit.model.MenuCategory;
+import com.example.minseop.midasit.model.MenuModel;
+import com.example.minseop.midasit.model.ResponseModel;
+import com.example.minseop.midasit.retrofit.MenuService;
 
 import java.io.ByteArrayOutputStream;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by minseop on 2018-05-26.
  */
 
 public class DetailedMenuManagementActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private static final String TAG = DetailedMenuManagementActivity.class.getSimpleName();
+
     private LinearLayout linearName, linearCategory, linearPrice;
     private ImageView imageView;
     private final int REQ_CAMERA_SELECT = 100;
@@ -161,7 +176,36 @@ public class DetailedMenuManagementActivity extends AppCompatActivity implements
             if (type == 1) {   //갱신
 
             } else if (type == 2) { //추가
+                final String name = txt_name.getText().toString();
+                final MenuCategory category = MenuCategory.COFFEE;
+                final int price = Integer.parseInt(txt_price.getText().toString());
 
+                MenuModel menuModel = new MenuModel();
+                menuModel.setName(name);
+                menuModel.setCategory(category);
+                menuModel.setPrice(price);
+                if (imageView != null && imageView.getDrawable() != null) {
+                    final String encodedImage = getBase64(imageView.getDrawable());
+                    menuModel.setImage(encodedImage);
+                }
+
+                final Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl(MidasCafeConstants.SERVER_URL)
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+                retrofit.create(MenuService.class)
+                        .insertMenu(menuModel)
+                        .enqueue(new Callback<ResponseModel>() {
+                            @Override
+                            public void onResponse(@NonNull Call<ResponseModel> call, @NonNull Response<ResponseModel> response) {
+                                Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
+                            }
+
+                            @Override
+                            public void onFailure(@NonNull Call<ResponseModel> call, @NonNull Throwable t) {
+                                Log.e(TAG, "onFailure: ", t);
+                            }
+                        });
             }
         } else {
             Intent intent = new Intent(DetailedMenuManagementActivity.this, TextUpdateActivity.class);
@@ -204,9 +248,10 @@ public class DetailedMenuManagementActivity extends AppCompatActivity implements
         } else if (requestCode == 100) {
             if (resultCode == RESULT_OK) {
                 try {
-                    Glide.with(this).load(getRealPathFromURI(data.getData())).into(imageView);
+                    Glide.with(this).load(getRealPathFromURI(data.getData())).asBitmap().into(imageView);
                     getBase64(imageView.getDrawable());
                 } catch (Exception e) {
+                    Log.e(TAG, "onActivityResult: ", e);
                 }
             }
         }
@@ -227,7 +272,6 @@ public class DetailedMenuManagementActivity extends AppCompatActivity implements
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
         byte[] byteArray = byteArrayOutputStream.toByteArray();
-        String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
-        return encoded;
+        return Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
 }
