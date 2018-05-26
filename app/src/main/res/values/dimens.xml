@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="activity_margin_narrow">8dp</dimen>
+    <dimen name="activity_margin">16dp</dimen>
+    <dimen name="activity_margin_wide">24dp</dimen>
+    <dimen name="activity_margin_very_wide">36dp</dimen>
+
     <dimen name="bottom_navigation_height">56dp</dimen>
     <dimen name="app_bar_height">56dp</dimen>
+
+    <dimen name="task_card_vertical_margin">2dp</dimen>
+    <dimen name="task_card_horizontal_margin">4dp</dimen>
+    <dimen name="task_card_vertical_padding_with_action">0dp</dimen>
+    <dimen name="task_card_radius">2dp</dimen>
 </resources>
