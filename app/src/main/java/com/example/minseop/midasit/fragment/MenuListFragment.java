@@ -51,7 +51,7 @@ public class MenuListFragment extends Fragment implements View.OnClickListener{
                 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
 
         recyclerView1 = (RecyclerView) view.findViewById(R.id.recyclerview1);
-        adapter1 = new MenuItemRecyclerAdapter(getActivity(), data1);
+            adapter1 = new MenuItemRecyclerAdapter(getActivity(), data1);
         recyclerView1.setAdapter(adapter1);
         recyclerView1.setLayoutManager(layoutManager1);
 
@@ -69,16 +69,16 @@ public class MenuListFragment extends Fragment implements View.OnClickListener{
 
 
         for (int i=0; i<5; i++){
-            MenuItem item = new MenuItem("",  "아메리카노"+i+"번", 3000+1000*i);
+            MenuItem item = new MenuItem("",  "아메리카노"+i+"번", 3000);
             data1.add(item);
         }
         for (int i=0; i<5; i++){
-            MenuItem item = new MenuItem("",  "아메리카노"+i+"번", 3000+1000*i);
+            MenuItem item = new MenuItem("",  "아메리카노"+i+"번", 3000);
             data2.add(item);
         }
 
         for (int i=0; i<5; i++){
-            MenuItem item = new MenuItem("",  "아메리카노"+i+"번", 3000+1000*i);
+            MenuItem item = new MenuItem("",  "아메리카노"+i+"번", 3000);
             data3.add(item);
         }
 
