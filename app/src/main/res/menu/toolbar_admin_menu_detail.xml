@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/toolbar_action_trash"
+        android:icon="@drawable/baseline_restore_from_trash_24"
+        android:title="휴지통"
+        app:showAsAction="ifRoom" />
+</menu>

@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:name=".MidasCafeApplication"
@@ -22,11 +23,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.admin.DetailedMenuManagementActivity"/>
         <activity android:name=".ui.customer.CustomerMainActivity" />
         <activity android:name=".ui.customer.MenuDetailActivity" />
         <activity android:name=".ui.customer.OrderActivity" />
         <activity android:name=".ui.admin.AdminMainActivity" />
         <activity android:name=".ui.customer.CustomerShoppingCartActivity"></activity>
+        <activity android:name=".ui.admin.TextUpdateActivity"/>
+        <activity android:name=".ui.admin.AdminAddMenuActivity"/>
     </application>
 
 </manifest>
