@@ -1,19 +1,16 @@
 package com.example.minseop.midasit.Activity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.minseop.midasit.R;
-import com.example.minseop.midasit.adapter.RecyclerGridAdapter;
+import com.example.minseop.midasit.adapter.MenuItemGridAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,20 +27,21 @@ public class MenuDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-
         recyclerView = findViewById(R.id.recyclerview);
-        GridLayoutManager mGridLayoutManager = new GridLayoutManager(MenuDetailActivity.this, 2);
 
+        MenuItemGridAdapter myAdapter = new MenuItemGridAdapter(MenuDetailActivity.this, data);
+        recyclerView.setAdapter(myAdapter);
+
+        GridLayoutManager mGridLayoutManager = new GridLayoutManager(MenuDetailActivity.this, 2);
         recyclerView.setLayoutManager(mGridLayoutManager);
 
 
         for (int i=0; i<5; i++){
-            com.example.minseop.midasit.Item.MenuItem item = new com.example.minseop.midasit.Item.MenuItem("",  "아메리카노"+i+"번", 3000+1000*i);
+            com.example.minseop.midasit.Item.MenuItem item = new com.example.minseop.midasit.Item.MenuItem("",  "아메리카노"+i+"번", 3000);
             data.add(item);
         }
 
-        RecyclerGridAdapter myAdapter = new RecyclerGridAdapter(MenuDetailActivity.this, data);
-        recyclerView.setAdapter(myAdapter);
+
         myAdapter.notifyDataSetChanged();
 
         intent = getIntent();

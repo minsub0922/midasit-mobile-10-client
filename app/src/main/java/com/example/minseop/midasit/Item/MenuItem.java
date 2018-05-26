@@ -23,6 +23,6 @@ public class MenuItem {
     public void setTitle(String title ){this.title = title;}
     public String getTitle(){return title;}
 
-    public void setPrice(int price){this.price =price;}
+    public void setPrice(int price){this.price = price;}
     public int getPrice(){return price;}
 }
