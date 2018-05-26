@@ -1,5 +1,6 @@
 package com.example.minseop.midasit.ui.admin;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -114,18 +115,41 @@ public class DetailedMenuManagementActivity extends AppCompatActivity implements
     @Override
     public void onClick(View v) {
         Intent intent = new Intent(DetailedMenuManagementActivity.this, TextUpdateActivity.class);
-
+        int reqCode = 0;
         if (v.getId()==R.id.linear_name_admin_menu_detail){
             intent.putExtra("status", "상품명");
             intent.putExtra("txt", name);
+            reqCode = 1;
         }else if (v.getId()==R.id.linear_category_admin_menu_detail){
             intent.putExtra("status", "카테고리");
             intent.putExtra("txt", category);
+            reqCode = 2;
         }else if (v.getId()==R.id.linear_price_admin_menu_detail){
             intent.putExtra("status", "가격");
             intent.putExtra("txt", price);
+            reqCode = 3;
         }
-        startActivity(intent);
+        startActivityForResult(intent,reqCode);
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK){
+                String result=data.getStringExtra("result");
+                Log.d("Success????",result);
+                txt_name.setText(result);
+            }
+        }else if (requestCode == 2){
+            if (resultCode == RESULT_OK){
+                String result = data.getStringExtra("result");
+                txt_category.setText(result);
+            }
+        }else if (requestCode == 3){
+            if (resultCode ==   RESULT_OK){
+                String result = data.getStringExtra("result");
+                txt_price.setText(result);
+            }
+        }
     }
 }

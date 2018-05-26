@@ -28,6 +28,7 @@
         <activity android:name=".ui.customer.OrderActivity" />
         <activity android:name=".ui.admin.AdminMainActivity"></activity>
         <activity android:name=".ui.admin.TextUpdateActivity"/>
+        <activity android:name=".ui.admin.AdminAddMenuActivity"/>
     </application>
 
 </manifest>
