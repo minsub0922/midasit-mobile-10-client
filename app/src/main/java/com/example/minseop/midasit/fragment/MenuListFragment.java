@@ -2,6 +2,7 @@ package com.example.minseop.midasit.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,94 +13,181 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.minseop.midasit.Activity.MenuDetailActivity;
-import com.example.minseop.midasit.Item.MenuItem;
+import com.example.minseop.midasit.MidasCafeConstants;
 import com.example.minseop.midasit.R;
+import com.example.minseop.midasit.Service.MenuService;
 import com.example.minseop.midasit.adapter.MenuItemRecyclerAdapter;
+import com.example.minseop.midasit.model.MenuCategory;
+import com.example.minseop.midasit.model.MenuListResponseModel;
+import com.example.minseop.midasit.model.MenuModel;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by minseop on 2018-05-26.
  */
 
-public class MenuListFragment extends Fragment implements View.OnClickListener{
-    private MenuItemRecyclerAdapter adapter1, adapter2, adapter3;
-    private List<MenuItem> data1 = new ArrayList<>(),  data2 = new ArrayList<>(),  data3 = new ArrayList<>();
-    private RecyclerView recyclerView1, recyclerView2, recyclerView3;
-    private static final String TAG = "Success????";
-    TextView more1, more2, more3;
+public class MenuListFragment extends Fragment implements View.OnClickListener {
+
+    private static final String TAG = MenuListFragment.class.getSimpleName();
+
+    private MenuItemRecyclerAdapter coffeeMenuListAdapter;
+    private RecyclerView coffeeMenuRecyclerView;
+    private TextView moreCoffeeMenuList;
+
+    private MenuItemRecyclerAdapter teaMenuListAdapter;
+    private RecyclerView teaMenuRecyclerView;
+    private TextView moreTeaMenuList;
+
+    private MenuItemRecyclerAdapter beverageMenuListAdapter;
+    private RecyclerView beverageMenuRecyclerView;
+    private TextView moreBeverageMenuList;
+
+    private final List<MenuModel> coffeeMenuList = new ArrayList<>();
+    private final List<MenuModel> teaMenuList = new ArrayList<>();
+    private final List<MenuModel> beverageMenuList = new ArrayList<>();
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_menulist, container, false);
 
-        View view = inflater.inflate(R.layout.fragment_menulist,container, false);
-        Log.d(TAG, String.valueOf(getActivity()));
-
-        more1 = view.findViewById(R.id.more1);
-        more2 = view.findViewById(R.id.more2);
-        more3 = view.findViewById(R.id.more3);
-
-        more1.setOnClickListener(this);
-        more2.setOnClickListener(this);
-        more3.setOnClickListener(this);
-
-        LinearLayoutManager layoutManager1
-                = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        LinearLayoutManager layoutManager2
-                = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        LinearLayoutManager layoutManager3
-                = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-
-        recyclerView1 = (RecyclerView) view.findViewById(R.id.recyclerview1);
-            adapter1 = new MenuItemRecyclerAdapter(getActivity(), data1);
-        recyclerView1.setAdapter(adapter1);
-        recyclerView1.setLayoutManager(layoutManager1);
-
-        recyclerView2 = (RecyclerView) view.findViewById(R.id.recyclerview2);
-        adapter2 = new MenuItemRecyclerAdapter(getActivity(), data2);
-        recyclerView2.setAdapter(adapter2);
-        recyclerView2.setLayoutManager(layoutManager2);
-
-        recyclerView3 = (RecyclerView) view.findViewById(R.id.recyclerview3);
-        adapter3 = new MenuItemRecyclerAdapter(getActivity(), data3);
-        recyclerView3.setAdapter(adapter3);
-        recyclerView3.setLayoutManager(layoutManager3);
+        moreCoffeeMenuList = view.findViewById(R.id.menu_list_more_coffee);
+        moreCoffeeMenuList.setOnClickListener(this);
+        moreTeaMenuList = view.findViewById(R.id.menu_list_more_tea);
+        moreTeaMenuList.setOnClickListener(this);
+        moreBeverageMenuList = view.findViewById(R.id.menu_list_more_beverage);
+        moreBeverageMenuList.setOnClickListener(this);
 
 
+        coffeeMenuRecyclerView = view.findViewById(R.id.recyclerview1);
+        coffeeMenuListAdapter = new MenuItemRecyclerAdapter(getActivity(), coffeeMenuList);
+        coffeeMenuRecyclerView.setAdapter(coffeeMenuListAdapter);
+        coffeeMenuRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
 
+        teaMenuRecyclerView = view.findViewById(R.id.recyclerview2);
+        teaMenuListAdapter = new MenuItemRecyclerAdapter(getActivity(), teaMenuList);
+        teaMenuRecyclerView.setAdapter(teaMenuListAdapter);
+        teaMenuRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
 
-        for (int i=0; i<5; i++){
-            MenuItem item = new MenuItem("",  "아메리카노"+i+"번", 3000);
-            data1.add(item);
-        }
-        for (int i=0; i<5; i++){
-            MenuItem item = new MenuItem("",  "아메리카노"+i+"번", 3000);
-            data2.add(item);
-        }
-
-        for (int i=0; i<5; i++){
-            MenuItem item = new MenuItem("",  "아메리카노"+i+"번", 3000);
-            data3.add(item);
-        }
-
-        adapter1.notifyDataSetChanged();
-        adapter2.notifyDataSetChanged();
-        adapter3.notifyDataSetChanged();
+        beverageMenuRecyclerView = view.findViewById(R.id.recyclerview3);
+        beverageMenuListAdapter = new MenuItemRecyclerAdapter(getActivity(), beverageMenuList);
+        beverageMenuRecyclerView.setAdapter(beverageMenuListAdapter);
+        beverageMenuRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
 
         return view;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        final Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(MidasCafeConstants.SERVER_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        final MenuService menuService = retrofit.create(MenuService.class);
+        menuService.getAllMenuByCategory(MenuCategory.COFFEE)
+                .enqueue(new Callback<MenuListResponseModel>() {
+                    @Override
+                    public void onResponse(@NonNull Call<MenuListResponseModel> call, @NonNull Response<MenuListResponseModel> response) {
+                        final MenuListResponseModel menuListResponse = response.body();
+                        if (menuListResponse == null) {
+                            // TODO(@gihwan): check error
+                        } else {
+                            final List<MenuModel> menus = menuListResponse.getMenus();
+                            if (menus == null) {
+                                // TODO(@gihwan): check error
+                            } else {
+                                coffeeMenuList.clear();
+                                coffeeMenuList.addAll(menus);
+                                coffeeMenuListAdapter.notifyDataSetChanged();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<MenuListResponseModel> call, @NonNull Throwable t) {
+                        // TODO(@gihwan): check error
+                        Log.d(TAG, "onFailure() called with: call = [" + call + "], t = [" + t + "]");
+                    }
+                });
+        menuService.getAllMenuByCategory(MenuCategory.TEA)
+                .enqueue(new Callback<MenuListResponseModel>() {
+                    @Override
+                    public void onResponse(@NonNull Call<MenuListResponseModel> call, @NonNull Response<MenuListResponseModel> response) {
+                        Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
+                        final MenuListResponseModel menuListResponse = response.body();
+                        if (menuListResponse == null) {
+                            // TODO(@gihwan): check error
+                        } else {
+                            final List<MenuModel> menus = menuListResponse.getMenus();
+                            if (menus == null) {
+                                // TODO(@gihwan): check error
+                            } else {
+                                teaMenuList.clear();
+                                teaMenuList.addAll(menus);
+                                teaMenuListAdapter.notifyDataSetChanged();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<MenuListResponseModel> call, @NonNull Throwable t) {
+                        // TODO(@gihwan): check error
+                        Log.d(TAG, "onFailure() called with: call = [" + call + "], t = [" + t + "]");
+                    }
+                });
+        menuService.getAllMenuByCategory(MenuCategory.BEVERAGE)
+                .enqueue(new Callback<MenuListResponseModel>() {
+                    @Override
+                    public void onResponse(@NonNull Call<MenuListResponseModel> call, @NonNull Response<MenuListResponseModel> response) {
+                        Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
+                        final MenuListResponseModel menuListResponse = response.body();
+                        if (menuListResponse == null) {
+                            // TODO(@gihwan): check error
+                        } else {
+                            final List<MenuModel> menus = menuListResponse.getMenus();
+                            if (menus == null) {
+                                // TODO(@gihwan): check error
+                            } else {
+                                beverageMenuList.clear();
+                                beverageMenuList.addAll(menus);
+                                beverageMenuListAdapter.notifyDataSetChanged();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<MenuListResponseModel> call, @NonNull Throwable t) {
+                        // TODO(@gihwan): check error
+                        Log.d(TAG, "onFailure() called with: call = [" + call + "], t = [" + t + "]");
+                    }
+                });
+    }
 
     @Override
     public void onClick(View v) {
         Intent intent = new Intent(getActivity(), MenuDetailActivity.class);
-        if (v.getId()==R.id.more1){
-            intent.putExtra("title","Coffee");
-        }else if(v.getId() ==R.id.more2){
-            intent.putExtra("title","Tea");
-        }else if (v.getId() == R.id.more3){
-            intent.putExtra("title","Beverage");
+
+        if (v.getId() == R.id.menu_list_more_coffee) {
+            intent.putExtra("category", MenuCategory.COFFEE);
+            intent.putExtra("title", "Coffee");
+        } else if (v.getId() == R.id.menu_list_more_tea) {
+            intent.putExtra("category", MenuCategory.TEA);
+            intent.putExtra("title", "Tea");
+        } else if (v.getId() == R.id.menu_list_more_beverage) {
+            intent.putExtra("category", MenuCategory.BEVERAGE);
+            intent.putExtra("title", "Beverage");
         }
+
         startActivity(intent);
     }
 }
