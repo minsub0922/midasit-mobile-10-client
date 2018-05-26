@@ -2,17 +2,19 @@ package com.example.minseop.midasit.model;
 
 public class AuthModel extends ResponseModel {
 
-    private boolean success;
+    private boolean result;
     private int id;
     private String employeeNumber;
+    private String username;
+    private int admin;
     private String token;
 
-    public boolean isSuccess() {
-        return success;
+    public boolean getResult() {
+        return result;
     }
 
-    public void setSuccess(boolean success) {
-        this.success = success;
+    public void setResult(boolean result) {
+        this.result = result;
     }
 
     public int getId() {
@@ -31,6 +33,22 @@ public class AuthModel extends ResponseModel {
         this.employeeNumber = employeeNumber;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public int getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(int admin) {
+        this.admin = admin;
+    }
+
     public String getToken() {
         return token;
     }
@@ -43,10 +61,12 @@ public class AuthModel extends ResponseModel {
     public String toString() {
         final StringBuilder sb = new StringBuilder("AuthModel{");
         sb.append("time=").append(time);
-        sb.append(", result=").append(result);
         sb.append(", success=").append(success);
+        sb.append(", result=").append(result);
         sb.append(", id=").append(id);
         sb.append(", employeeNumber='").append(employeeNumber).append('\'');
+        sb.append(", username='").append(username).append('\'');
+        sb.append(", admin=").append(admin);
         sb.append(", token='").append(token).append('\'');
         sb.append('}');
         return sb.toString();
