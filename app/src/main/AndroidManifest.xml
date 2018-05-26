@@ -26,6 +26,7 @@
         <activity
             android:name=".Activity.TestActivity"
             android:theme="@style/Base.Widget.AppCompat.ActionBar.Custom" />
+        <activity android:name=".Activity.OrderActivity" />
     </application>
 
 </manifest>

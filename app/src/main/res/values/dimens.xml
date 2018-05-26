@@ -8,8 +8,8 @@
     <dimen name="bottom_navigation_height">56dp</dimen>
     <dimen name="app_bar_height">56dp</dimen>
 
-    <dimen name="task_card_vertical_margin">2dp</dimen>
-    <dimen name="task_card_horizontal_margin">4dp</dimen>
-    <dimen name="task_card_vertical_padding_with_action">0dp</dimen>
-    <dimen name="task_card_radius">2dp</dimen>
+    <dimen name="card_vertical_margin">2dp</dimen>
+    <dimen name="card_horizontal_margin">4dp</dimen>
+    <dimen name="card_vertical_padding_with_action">0dp</dimen>
+    <dimen name="card_radius">2dp</dimen>
 </resources>

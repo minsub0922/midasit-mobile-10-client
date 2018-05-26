@@ -5,4 +5,14 @@
     <string name="mypage">내정보</string>
     <string name="notification">알림</string>
     <string name="shopping_cart">장바구니</string>
+    <string name="size">사이즈</string>
+    <string name="size_tall">Tall</string>
+    <string name="size_venti">Venti</string>
+    <string name="size_grande">Grande</string>
+    <string name="ice">아이스</string>
+    <string name="syrup">시럽</string>
+    <string name="whipping">휘핑 크림</string>
+    <string name="count">수량</string>
+    <string name="pay_now">즉시 결제</string>
+    <string name="store_shopping_cart">장바구니 담기</string>
 </resources>

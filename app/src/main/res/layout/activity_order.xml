@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.OrderActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/order_app_bar"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/app_bar_height"
+        app:layout_constraintBottom_toTopOf="@id/order_scroll"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/order_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView
+        android:id="@+id/order_scroll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/order_pay_now_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/order_app_bar">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/order_item_image"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/activity_margin"
+                android:paddingEnd="@dimen/activity_margin"
+                android:paddingStart="@dimen/activity_margin"
+                app:layout_constraintBottom_toTopOf="@id/order_size_header"
+                app:layout_constraintDimensionRatio="H,16:9"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/order_size_header"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_margin"
+                android:paddingEnd="@dimen/activity_margin"
+                android:paddingStart="@dimen/activity_margin"
+                android:text="@string/size"
+                android:textColor="@color/textColorDarkPrimary"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/order_item_image" />
+
+            <Button
+                android:id="@+id/order_size_tall_button"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_margin_narrow"
+                android:padding="@dimen/activity_margin_narrow"
+                android:text="@string/size_tall"
+                app:layout_constraintEnd_toStartOf="@id/order_size_grande_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/order_size_header" />
+
+            <Button
+                android:id="@+id/order_size_grande_button"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_margin_narrow"
+                android:padding="@dimen/activity_margin_narrow"
+                android:text="@string/size_grande"
+                app:layout_constraintEnd_toStartOf="@id/order_size_venti_button"
+                app:layout_constraintStart_toEndOf="@id/order_size_tall_button"
+                app:layout_constraintTop_toBottomOf="@id/order_size_header" />
+
+            <Button
+                android:id="@+id/order_size_venti_button"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_margin_narrow"
+                android:padding="@dimen/activity_margin_narrow"
+                android:text="@string/size_venti"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/order_size_grande_button"
+                app:layout_constraintTop_toBottomOf="@id/order_size_header" />
+
+            <TextView
+                android:id="@+id/order_ice_header"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="@dimen/activity_margin"
+                android:paddingEnd="@dimen/activity_margin"
+                android:paddingStart="@dimen/activity_margin"
+                android:text="@string/ice"
+                android:textColor="@color/textColorDarkPrimary"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/order_syrup_header"
+                app:layout_constraintEnd_toStartOf="@id/order_ice_switch"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/order_size_tall_button" />
+
+            <Switch
+                android:id="@+id/order_ice_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/activity_margin"
+                android:layout_marginStart="@dimen/activity_margin"
+                app:layout_constraintBottom_toTopOf="@id/order_syrup_header"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toEndOf="@id/order_ice_header"
+                app:layout_constraintTop_toBottomOf="@id/order_size_tall_button" />
+
+            <TextView
+                android:id="@+id/order_syrup_header"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_margin"
+                android:paddingEnd="@dimen/activity_margin"
+                android:paddingStart="@dimen/activity_margin"
+                android:text="@string/syrup"
+                android:textColor="@color/textColorDarkPrimary"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/order_whipping_header"
+                app:layout_constraintEnd_toStartOf="@id/order_syrup_switch"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/order_ice_header" />
+
+            <Switch
+                android:id="@+id/order_syrup_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/activity_margin"
+                android:layout_marginStart="@dimen/activity_margin"
+                app:layout_constraintBottom_toTopOf="@id/order_whipping_header"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toEndOf="@id/order_syrup_header"
+                app:layout_constraintTop_toBottomOf="@id/order_ice_header" />
+
+            <TextView
+                android:id="@+id/order_whipping_header"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_margin"
+                android:paddingEnd="@dimen/activity_margin"
+                android:paddingStart="@dimen/activity_margin"
+                android:text="@string/whipping"
+                android:textColor="@color/textColorDarkPrimary"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/order_whipping_switch"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/order_syrup_header" />
+
+            <Switch
+                android:id="@+id/order_whipping_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/activity_margin"
+                android:layout_marginStart="@dimen/activity_margin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toEndOf="@id/order_whipping_header"
+                app:layout_constraintTop_toBottomOf="@id/order_syrup_header" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/order_pay_now_button"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/activity_margin_narrow"
+        android:text="@string/pay_now"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/order_store_shopping_cart_button"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/order_scroll" />
+
+    <Button
+        android:id="@+id/order_store_shopping_cart_button"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/activity_margin_narrow"
+        android:text="@string/store_shopping_cart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@id/order_pay_now_button"
+        app:layout_constraintTop_toBottomOf="@id/order_scroll" />
+
+</android.support.constraint.ConstraintLayout>
