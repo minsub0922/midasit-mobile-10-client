@@ -15,8 +15,8 @@ import retrofit2.http.Path;
 
 public interface ShoppingCartService {
 
-    @POST("/shoppingcart/{userId}/add")
-    Call<ShoppingCartItem> addShoppingCartItem(@Path("userId") String userId, @Body ShoppingCartItem shoppingCartItem);
+    @POST("/shoppingcart//userid/{userId}")
+    Call<ShoppingCartItem> addShoppingCartItem(@Path("userId") int userId, @Body ShoppingCartItem shoppingCartItem);
 
     @GET("/shoppingcart/userid/{userId}")
     Call<ShoppingCartResponse> requestShoppingCartItemList(@Path("userId") int userId);

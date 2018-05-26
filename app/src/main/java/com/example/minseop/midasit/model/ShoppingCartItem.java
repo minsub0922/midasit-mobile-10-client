@@ -15,6 +15,39 @@ public class ShoppingCartItem extends ResponseModel {
     private String name;
     private int price;
     private String image;
+    private int size;
+
+    public int getIce() {
+        return ice;
+    }
+
+    public void setIce(int ice) {
+        this.ice = ice;
+    }
+
+    public int getSyrup() {
+        return syrup;
+    }
+
+    public void setSyrup(int syrup) {
+        this.syrup = syrup;
+    }
+
+    public int getWhipping() {
+        return whipping;
+    }
+
+    public void setWhipping(int whipping) {
+        this.whipping = whipping;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
 
     public int getUserId() {
         return userId;
@@ -102,6 +135,7 @@ public class ShoppingCartItem extends ResponseModel {
         sb.append(", name='").append(name).append('\'');
         sb.append(", price=").append(price);
         sb.append(", image='").append(image).append('\'');
+        sb.append(", size='").append(size).append('\'');
         sb.append('}');
         return sb.toString();
     }
