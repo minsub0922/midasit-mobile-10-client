@@ -13,6 +13,7 @@ import android.widget.Button;
 import com.example.minseop.midasit.MidasCafeApplication;
 import com.example.minseop.midasit.MidasCafeConstants;
 import com.example.minseop.midasit.R;
+import com.example.minseop.midasit.Realm.autoLoginModel;
 import com.example.minseop.midasit.model.AdministratorLevel;
 import com.example.minseop.midasit.model.AuthModel;
 import com.example.minseop.midasit.model.AuthRequest;
@@ -20,11 +21,14 @@ import com.example.minseop.midasit.retrofit.AuthService;
 import com.example.minseop.midasit.ui.admin.AdminMainActivity;
 import com.example.minseop.midasit.ui.customer.CustomerMainActivity;
 
+import io.realm.Realm;
+import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -33,14 +37,52 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputEditText employeeNumber;
     private TextInputEditText password;
     private Button signinButton;
+    Realm realm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         setupInputs();
         setupSigninButton();
+        Realm.init(this);
+        checkToken();
+    }
+
+    private void checkToken()    {
+        realm = Realm.getDefaultInstance();
+
+       /* realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                autoLoginModel autoLoginModel = realm.where(autoLoginModel.class).findFirst();
+                autoLoginModel.deleteFromRealm();
+            }
+        });*/
+        autoLoginModel autoLoginModel = realm.where(autoLoginModel.class).findFirst();
+
+        if(autoLoginModel != null)
+        {
+            AuthModel tmpAuthModel = new AuthModel();
+            tmpAuthModel.setAdmin(autoLoginModel.getAdmin());
+            tmpAuthModel.setEmployeeNumber(autoLoginModel.getEmployeeNumber());
+            tmpAuthModel.setId(autoLoginModel.getId());
+            tmpAuthModel.setToken(autoLoginModel.getToken());
+            tmpAuthModel.setUsername(autoLoginModel.getUsername());
+            MidasCafeApplication.getInstance().setAuthModel(tmpAuthModel);
+
+            if (autoLoginModel.getAdmin() == AdministratorLevel.EMPLOYEE.getValue()) {
+                Intent intent = new Intent(LoginActivity.this, CustomerMainActivity.class);
+                startActivity(intent);
+                finish();
+            } else {
+                // 관리자
+                Intent intent = new Intent(LoginActivity.this, AdminMainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        }
+
     }
 
     private void setupInputs() {
@@ -72,6 +114,14 @@ public class LoginActivity extends AppCompatActivity {
                             if (authModel.getResult()) {
                                 // 로그인 성공
                                 MidasCafeApplication.getInstance().setAuthModel(authModel);
+
+                                realm.beginTransaction();
+                                autoLoginModel autoLoginModel = realm.createObject(com.example.minseop.midasit.Realm.autoLoginModel.class,authModel.getId());
+                                autoLoginModel.setEmployeeNumber(authModel.getEmployeeNumber());
+                                autoLoginModel.setAdmin(authModel.getAdmin());
+                                autoLoginModel.setUsername(authModel.getUsername());
+                                autoLoginModel.setToken(authModel.getToken());
+                                realm.commitTransaction();
 
                                 if (authModel.getAdmin() == AdministratorLevel.EMPLOYEE.getValue()) {
                                     Intent intent = new Intent(LoginActivity.this, CustomerMainActivity.class);
