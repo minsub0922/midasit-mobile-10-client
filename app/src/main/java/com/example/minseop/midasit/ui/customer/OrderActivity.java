@@ -14,9 +14,6 @@ import com.example.minseop.midasit.R;
 import com.example.minseop.midasit.model.ShoppingCartItem;
 import com.example.minseop.midasit.retrofit.ShoppingCartService;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -71,7 +68,7 @@ public class OrderActivity extends AppCompatActivity {
 
                 ShoppingCartItem tmpshoppingCartItem = new ShoppingCartItem();
                 //tmpshoppingCartItem.setMenuId(menuId);
-                tmpshoppingCartItem.setSize(size);
+                tmpshoppingCartItem.setCount(size);
                 tmpshoppingCartItem.setWhipping(whipping);
                 tmpshoppingCartItem.setIce(ice);
                 tmpshoppingCartItem.setSyrup(syrup);
@@ -181,7 +178,7 @@ public class OrderActivity extends AppCompatActivity {
                 if (isChecked) {
                     whipping = true;
                 } else {
-                    whipping= false;
+                    whipping = false;
                 }
             }
         });

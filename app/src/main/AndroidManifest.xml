@@ -25,7 +25,8 @@
         <activity android:name=".ui.customer.CustomerMainActivity" />
         <activity android:name=".ui.customer.MenuDetailActivity" />
         <activity android:name=".ui.customer.OrderActivity" />
-        <activity android:name=".ui.admin.AdminMainActivity"></activity>
+        <activity android:name=".ui.admin.AdminMainActivity" />
+        <activity android:name=".ui.customer.CustomerShoppingCartActivity"></activity>
     </application>
 
 </manifest>

@@ -1,8 +1,7 @@
 package com.example.minseop.midasit.retrofit;
 
 import com.example.minseop.midasit.model.ShoppingCartItem;
-
-import java.util.List;
+import com.example.minseop.midasit.model.ShoppingCartResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -16,10 +15,10 @@ import retrofit2.http.Path;
 
 public interface ShoppingCartService {
 
-    @POST("/shoppingCart/{userId}/add")
-    Call<ShoppingCartItem> addShoppingCartItem(@Path("userId") String userId ,@Body ShoppingCartItem shoppingCartItem);
+    @POST("/shoppingcart/{userId}/add")
+    Call<ShoppingCartItem> addShoppingCartItem(@Path("userId") String userId, @Body ShoppingCartItem shoppingCartItem);
 
-    @GET("/shoppingCart/{userId}")
-    Call<List<ShoppingCartItem>> requestShoppingCartItemList(@Path("userId") String userId);
+    @GET("/shoppingcart/userid/{userId}")
+    Call<ShoppingCartResponse> requestShoppingCartItemList(@Path("userId") int userId);
 
 }
