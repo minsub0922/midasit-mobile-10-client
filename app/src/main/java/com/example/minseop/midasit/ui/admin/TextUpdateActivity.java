@@ -1,11 +1,9 @@
 package com.example.minseop.midasit.ui.admin;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,7 +36,7 @@ public class TextUpdateActivity extends AppCompatActivity {
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent.putExtra("result",String.valueOf(edt_txtupdate.getText()));
+                intent.putExtra("result", String.valueOf(edt_txtupdate.getText()));
                 setResult(RESULT_OK, intent);
                 finish();
             }

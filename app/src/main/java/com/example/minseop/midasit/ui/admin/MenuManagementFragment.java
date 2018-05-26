@@ -22,7 +22,6 @@ import com.example.minseop.midasit.model.MenuListResponseModel;
 import com.example.minseop.midasit.model.MenuModel;
 import com.example.minseop.midasit.retrofit.MenuService;
 import com.example.minseop.midasit.ui.adapter.MenuItemManagementRecyclerAdapter;
-import com.example.minseop.midasit.ui.adapter.MenuItemRecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,8 +66,10 @@ public class MenuManagementFragment extends Fragment {
             scrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
                 @Override
                 public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                    if (scrollY-oldScrollY > 0 && faAddMenu.getVisibility()==View.VISIBLE) faAddMenu.hide();
-                    else if (scrollY-oldScrollY < 0 && faAddMenu.getVisibility()!=View.VISIBLE) faAddMenu.show();
+                    if (scrollY - oldScrollY > 0 && faAddMenu.getVisibility() == View.VISIBLE)
+                        faAddMenu.hide();
+                    else if (scrollY - oldScrollY < 0 && faAddMenu.getVisibility() != View.VISIBLE)
+                        faAddMenu.show();
                 }
             });
         }
@@ -87,9 +88,9 @@ public class MenuManagementFragment extends Fragment {
         txt_title1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (coffeeMenuRecyclerView.getVisibility()==View.VISIBLE){
+                if (coffeeMenuRecyclerView.getVisibility() == View.VISIBLE) {
                     coffeeMenuRecyclerView.setVisibility(View.GONE);
-                }else{
+                } else {
                     coffeeMenuRecyclerView.setVisibility(View.VISIBLE);
                 }
             }
@@ -110,9 +111,9 @@ public class MenuManagementFragment extends Fragment {
         txt_title2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (teaMenuRecyclerView.getVisibility()==View.VISIBLE){
+                if (teaMenuRecyclerView.getVisibility() == View.VISIBLE) {
                     teaMenuRecyclerView.setVisibility(View.GONE);
-                }else{
+                } else {
                     teaMenuRecyclerView.setVisibility(View.VISIBLE);
                 }
             }
@@ -127,9 +128,9 @@ public class MenuManagementFragment extends Fragment {
         txt_title3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (beverageMenuRecyclerView.getVisibility()==View.VISIBLE){
+                if (beverageMenuRecyclerView.getVisibility() == View.VISIBLE) {
                     beverageMenuRecyclerView.setVisibility(View.GONE);
-                }else{
+                } else {
                     beverageMenuRecyclerView.setVisibility(View.VISIBLE);
                 }
             }

@@ -125,7 +125,7 @@
                 android:inputType="number"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/order_count"
-                app:layout_constraintTop_toBottomOf="@+id/order_size_tall_button"/>
+                app:layout_constraintTop_toBottomOf="@+id/order_size_tall_button" />
 
             <TextView
                 android:id="@+id/order_ice_header"

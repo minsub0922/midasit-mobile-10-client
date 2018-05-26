@@ -9,15 +9,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.minseop.midasit.R;
-import com.example.minseop.midasit.model.ShoppingCartItem;
+import com.example.minseop.midasit.model.Order;
 
 import java.util.List;
 
 public class CustomerShoppingCartRecyclerAdapter extends RecyclerView.Adapter<CustomerShoppingCartRecyclerAdapter.CustomerShoppingCartViewHolder> {
 
-    private final List<ShoppingCartItem> shoppingCart;
+    private final List<Order> shoppingCart;
 
-    public CustomerShoppingCartRecyclerAdapter(@NonNull List<ShoppingCartItem> shoppingCart) {
+    public CustomerShoppingCartRecyclerAdapter(@NonNull List<Order> shoppingCart) {
         this.shoppingCart = shoppingCart;
     }
 
@@ -31,8 +31,8 @@ public class CustomerShoppingCartRecyclerAdapter extends RecyclerView.Adapter<Cu
 
     @Override
     public void onBindViewHolder(@NonNull CustomerShoppingCartViewHolder holder, int position) {
-        final ShoppingCartItem shoppingCartItem = shoppingCart.get(position);
-        holder.menuName.setText(shoppingCartItem.getName());
+        final Order order = shoppingCart.get(position);
+        holder.menuName.setText(order.getName());
         holder.menuImage.setImageDrawable(holder.itemView.getResources().getDrawable(R.drawable.ic_launcher_foreground));
     }
 

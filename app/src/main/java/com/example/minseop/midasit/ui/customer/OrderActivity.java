@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Switch;
 
-import com.example.minseop.midasit.MidasCafeApplication;
 import com.example.minseop.midasit.MidasCafeConstants;
 import com.example.minseop.midasit.R;
 import com.example.minseop.midasit.model.ShoppingCartItem;
@@ -84,11 +83,11 @@ public class OrderActivity extends AppCompatActivity {
                 tmpshoppingCartItem.setIce(ice);
                 tmpshoppingCartItem.setSyrup(syrup);
 
-                Log.d("int"," "+Integer.parseInt(countEditText.getText().toString()));
+                Log.d("int", " " + Integer.parseInt(countEditText.getText().toString()));
 
-               // final Call<ShoppingCartItem> ShoppingListCall = ShoppingService.addShoppingCartItem( MidasCafeApplication.getInstance().getAuthModel().getId(),tmpshoppingCartItem);
+                // final Call<ShoppingCartItem> ShoppingListCall = ShoppingService.addShoppingCartItem( MidasCafeApplication.getInstance().getAuthModel().getId(),tmpshoppingCartItem);
 
-                final Call<ShoppingCartItem> ShoppingListCall = ShoppingService.addShoppingCartItem( 1,tmpshoppingCartItem);
+                final Call<ShoppingCartItem> ShoppingListCall = ShoppingService.addShoppingCartItem(1, tmpshoppingCartItem);
                 ShoppingListCall.enqueue(new Callback<ShoppingCartItem>() {
                     @Override
                     public void onResponse(Call<ShoppingCartItem> call, Response<ShoppingCartItem> response) {

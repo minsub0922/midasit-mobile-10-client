@@ -12,9 +12,9 @@ import android.view.MenuItem;
 import com.example.minseop.midasit.MidasCafeApplication;
 import com.example.minseop.midasit.MidasCafeConstants;
 import com.example.minseop.midasit.R;
-import com.example.minseop.midasit.model.ShoppingCartItem;
-import com.example.minseop.midasit.model.ShoppingCartResponse;
-import com.example.minseop.midasit.retrofit.ShoppingCartService;
+import com.example.minseop.midasit.model.Order;
+import com.example.minseop.midasit.model.OrderResponse;
+import com.example.minseop.midasit.retrofit.OrderService;
 import com.example.minseop.midasit.ui.adapter.CustomerShoppingCartRecyclerAdapter;
 
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ public class CustomerShoppingCartActivity extends AppCompatActivity {
 
     private RecyclerView recycler;
     private RecyclerView.Adapter adapter;
-    private final List<ShoppingCartItem> shoppingCart = new ArrayList<>();
+    private final List<Order> shoppingCart = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,24 +50,23 @@ public class CustomerShoppingCartActivity extends AppCompatActivity {
                 .baseUrl(MidasCafeConstants.SERVER_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        retrofit.create(ShoppingCartService.class)
-                .requestShoppingCartItemList(MidasCafeApplication.getInstance().getAuthModel().getId())
-                .enqueue(new Callback<ShoppingCartResponse>() {
+        retrofit.create(OrderService.class)
+                .getAllShoppingCartByUserId(MidasCafeApplication.getInstance().getAuthModel().getId())
+                .enqueue(new Callback<OrderResponse>() {
                     @Override
-                    public void onResponse(@NonNull Call<ShoppingCartResponse> call, @NonNull Response<ShoppingCartResponse> response) {
-                        final ShoppingCartResponse shoppingCartResponse = response.body();
-                        if (shoppingCartResponse == null) {
-                            // TODO(@gihwan): check error
+                    public void onResponse(@NonNull Call<OrderResponse> call, @NonNull Response<OrderResponse> response) {
+                        final OrderResponse orderResponse = response.body();
+                        if (orderResponse == null) {
                             Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
                         } else {
                             shoppingCart.clear();
-                            shoppingCart.addAll(shoppingCartResponse.getShoppingcart());
+                            shoppingCart.addAll(orderResponse.getOrders());
                             adapter.notifyDataSetChanged();
                         }
                     }
 
                     @Override
-                    public void onFailure(@NonNull Call<ShoppingCartResponse> call, @NonNull Throwable t) {
+                    public void onFailure(@NonNull Call<OrderResponse> call, @NonNull Throwable t) {
                         // TODO(@gihwan): check error
                         Log.d(TAG, "onFailure() called with: call = [" + call + "], t = [" + t + "]");
                     }
