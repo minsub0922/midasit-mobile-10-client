@@ -13,8 +13,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     <TextView
+        android:textColor="#000000"
+        android:id="@+id/txt_profile_reservation"
         android:text="예약처리 현황"
-        android:textSize="20dp"
+        android:textSize="25dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
@@ -25,8 +27,10 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="25dp"/>
     <TextView
+        android:textColor="#000000"
+        android:id="@+id/txt_profile_monthly"
         android:text="월별 구매내역 조회"
-        android:textSize="20dp"
+        android:textSize="25dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"

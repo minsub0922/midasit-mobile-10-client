@@ -78,7 +78,7 @@ public class CustomerMainActivity extends AppCompatActivity {
                 final int itemId = item.getItemId();
 
                 if (itemId == R.id.bottom_navigation_action_home) {
-                    return replaceViewPager(new MenuListFragment());
+                    return replaceViewPager(new CustomerHomeFragment());
                 } else if (itemId == R.id.bottom_navigation_action_menu) {
                     return replaceViewPager(new MenuListFragment());
                 } else if (itemId == R.id.bottom_navigation_action_mypage) {
