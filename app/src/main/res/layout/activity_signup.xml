@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#4466bb"
+    android:background="#ffffff"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:paddingBottom="16dp"
@@ -24,10 +24,14 @@
         android:layout_weight="1">
     <android.support.design.widget.TextInputLayout
         android:layout_width="0dp"
+        android:textColorHint="#444444"
         android:layout_weight="7"
         android:layout_height="match_parent">
         <EditText
             android:id="@+id/edt_id"
+            android:backgroundTint="#444444"
+            android:textColor="#444444"
+            android:textColorHint="#444444"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="id"
@@ -52,9 +56,13 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_weight="1"
+        android:textColorHint="#444444"
         android:layout_height="0dp">
         <EditText
             android:id="@+id/edt_pw"
+            android:backgroundTint="#444444"
+            android:textColor="#444444"
+            android:textColorHint="#444444"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="password"
@@ -67,14 +75,17 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_weight="1"
+        android:textColorHint="#444444"
         android:layout_height="0dp">
         <EditText
             android:id="@+id/edt_name"
+            android:backgroundTint="#444444"
+            android:textColor="#444444"
+            android:textColorHint="#444444"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="user name"
             android:imeActionId="6"
-
             android:imeOptions="actionUnspecified"
             android:maxLines="1"
             android:singleLine="true"/>
