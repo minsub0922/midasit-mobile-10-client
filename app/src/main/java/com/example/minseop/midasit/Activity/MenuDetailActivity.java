@@ -33,6 +33,7 @@ public class MenuDetailActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerview);
         GridLayoutManager mGridLayoutManager = new GridLayoutManager(MenuDetailActivity.this, 2);
+
         recyclerView.setLayoutManager(mGridLayoutManager);
 
 
