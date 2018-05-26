@@ -1,6 +1,6 @@
 package com.example.minseop.midasit.model;
 
-public abstract class ResponseModel {
+public class ResponseModel {
 
     protected long time;
     protected boolean success;
