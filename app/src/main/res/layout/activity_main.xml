@@ -12,8 +12,8 @@
         android:id="@+id/main_app_bar"
         layout="@layout/main_app_bar" />
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/main_view_pager"
+    <FrameLayout
+        android:id="@+id/main_fragment_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/main_bottom_navigation"
