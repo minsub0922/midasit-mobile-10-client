@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cardview"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="7dp"
-    card_view:cardCornerRadius="5dp">
+    android:layout_marginBottom="@dimen/card_vertical_margin"
+    android:layout_marginEnd="@dimen/card_horizontal_margin"
+    android:layout_marginStart="@dimen/card_horizontal_margin"
+    android:layout_marginTop="@dimen/card_vertical_margin"
+    android:background="@color/colorCards"
+    card_view:cardBackgroundColor="@color/colorCards"
+    card_view:cardCornerRadius="@dimen/card_radius">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="7dp">
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/menuitem_grid_image"
@@ -23,17 +26,17 @@
             android:id="@+id/menuitem_grid_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="test"
             android:textAlignment="center"
-            android:textSize="11dp" />
+            android:textColor="@color/textColorDarkPrimary"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/menuitem_grid_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="test"
             android:textAlignment="center"
-            android:textSize="9dp" />
-
+            android:textColor="@color/textColorDarkSecondary"
+            android:textSize="12sp" />
     </LinearLayout>
+
 </android.support.v7.widget.CardView>

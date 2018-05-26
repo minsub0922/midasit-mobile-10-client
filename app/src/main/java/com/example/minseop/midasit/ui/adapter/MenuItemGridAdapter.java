@@ -2,7 +2,6 @@ package com.example.minseop.midasit.ui.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,8 +21,8 @@ import java.util.List;
 
 public class MenuItemGridAdapter extends RecyclerView.Adapter<MenuItemGridAdapter.MenuItemViewHolder> {
 
-    List<MenuModel> items;
-    Context context;
+    private final Context context;
+    private final List<MenuModel> items;
 
     public MenuItemGridAdapter(Context context, List<MenuModel> items) {
         this.context = context;
@@ -47,7 +46,7 @@ public class MenuItemGridAdapter extends RecyclerView.Adapter<MenuItemGridAdapte
 //        Glide.with(context).load(item.getImgResource()).into(holder.image);
         holder.title.setText(item.getName());
         holder.price.setText(String.valueOf(item.getPrice()));
-        holder.cardview.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, item.getName(), Toast.LENGTH_SHORT).show();
@@ -63,14 +62,12 @@ public class MenuItemGridAdapter extends RecyclerView.Adapter<MenuItemGridAdapte
     public class MenuItemViewHolder extends RecyclerView.ViewHolder {
         ImageView image;
         TextView title, price;
-        CardView cardview;
 
         public MenuItemViewHolder(View itemView) {
             super(itemView);
             image = (ImageView) itemView.findViewById(R.id.menuitem_grid_image);
             title = (TextView) itemView.findViewById(R.id.menuitem_grid_title);
             price = itemView.findViewById(R.id.menuitem_grid_price);
-            cardview = (CardView) itemView.findViewById(R.id.cardview);
         }
     }
 }

@@ -2,14 +2,13 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#224499</color>
+    <color name="colorAccent">#673AB7</color>
 
     <color name="colorStatusBar">#E0E0E0</color>
     <color name="colorAppBar">#F5F5F5</color>
     <color name="colorBackground">#FAFAFA</color>
     <color name="colorCards">#FFFFFF</color>
     <color name="colorDialogs">#FFFFFF</color>
-    <color name="signalColor">#673AB7</color>
 
     <color name="textColorDarkPrimary">#df000000</color>
     <color name="textColorDarkSecondary">#8a000000</color>
