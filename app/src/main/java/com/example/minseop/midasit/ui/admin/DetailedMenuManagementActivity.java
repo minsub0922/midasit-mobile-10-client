@@ -43,24 +43,36 @@ public class DetailedMenuManagementActivity extends AppCompatActivity implements
     private Button btn_submit;
     String price, category, name;
     TextView txt_name, txt_price, txt_category;
+    int type = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_menu_detail);
         Intent intent = getIntent();
-        id = intent.getIntExtra("id", 0);
+        id = intent.getIntExtra("id", -1);
         price = String.valueOf(intent.getIntExtra("price", 0));
         category = intent.getStringExtra("category");
         name = intent.getStringExtra("name");
+
+
         imageView = findViewById(R.id.img_admin_menu_detail);
         imageView.setOnClickListener(this);
-        btn_submit = findViewById(R.id.admin_textupdate_btn_submit);
+        btn_submit = findViewById(R.id.btn_admin_menu_detail_submit);
         btn_submit.setOnClickListener(this);
 
         txt_name = findViewById(R.id.txt_name_admin_menu_detail);
         txt_category = findViewById(R.id.txt_category_admin_menu_detail);
         txt_price = findViewById(R.id.txt_price_admin_menu_detail);
+
+        if (id == -1) {
+            type = 2;
+            category = "";
+            name = "";
+            price = "";
+            btn_submit.setText("제품 추가하기");
+        }
+
         txt_name.setText(name);
         txt_category.setText(category);
         txt_price.setText(price);
@@ -82,13 +94,14 @@ public class DetailedMenuManagementActivity extends AppCompatActivity implements
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle("상품 정보 변경하기");
+            if (type == 1) getSupportActionBar().setTitle("상품 정보 변경하기");
+            else if (type == 2) getSupportActionBar().setTitle("상품 추가 하기");
         }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_admin_menu_detail, menu);
+        if (type == 1) getMenuInflater().inflate(R.menu.toolbar_admin_menu_detail, menu);
         return true;
     }
 
@@ -99,33 +112,20 @@ public class DetailedMenuManagementActivity extends AppCompatActivity implements
             finish();
         } else if (itemId == R.id.toolbar_action_trash) {
             //delete in DB
-
             AlertDialog.Builder builder = new AlertDialog.Builder(DetailedMenuManagementActivity.this);
-
-            // Set a title for alert dialog
             builder.setTitle("영구 삭제하시겠습니까 ?");
-
-            // Ask the final question
-
-            // Set the alert dialog yes button click listener
             builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    // Do something when user clicked the Yes button
-                    // Set the TextView visibility GONE
                 }
             });
-
-            // Set the alert dialog no button click listener
             builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    // Do something when No button clicked
                 }
             });
 
             AlertDialog dialog = builder.create();
-            // Display the alert dialog on interface
             dialog.show();
 
             return true;
@@ -155,8 +155,14 @@ public class DetailedMenuManagementActivity extends AppCompatActivity implements
             startActivityForResult(intent, REQ_CAMERA_SELECT);
 
 
-        } else if (v.getId() == R.id.admin_textupdate_btn_submit) {
+        } else if (v.getId() == R.id.btn_admin_menu_detail_submit) {
             //DB 작업 및 액티비티 종료
+
+            if (type == 1) {   //갱신
+
+            } else if (type == 2) { //추가
+
+            }
         } else {
             Intent intent = new Intent(DetailedMenuManagementActivity.this, TextUpdateActivity.class);
             int reqCode = 0;
