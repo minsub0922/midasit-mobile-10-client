@@ -17,6 +17,7 @@ import com.example.minseop.midasit.Service.AuthService;
 import com.example.minseop.midasit.model.AdministratorLevel;
 import com.example.minseop.midasit.model.AuthModel;
 import com.example.minseop.midasit.model.AuthRequest;
+import com.example.minseop.midasit.ui.admin.AdminMainActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -77,6 +78,9 @@ public class LoginActivity extends AppCompatActivity {
                                     finish();
                                 } else {
                                     // 관리자
+                                    Intent intent = new Intent(LoginActivity.this, AdminMainActivity.class);
+                                    startActivity(intent);
+                                    finish();
                                 }
                             } else {
                                 // 로그인 실패
