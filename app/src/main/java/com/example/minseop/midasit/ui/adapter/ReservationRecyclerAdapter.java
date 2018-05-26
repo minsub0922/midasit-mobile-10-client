@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.example.minseop.midasit.R;
@@ -32,6 +33,7 @@ public class ReservationRecyclerAdapter extends RecyclerView.Adapter<Reservation
     public void onBindViewHolder(@NonNull ReservationRecyclerViewHolder holder, int position) {
         final Order order = reservations.get(position);
 
+        holder.completed.setChecked(order.getStatus().equals(Order.ORDER_STATUS_COMPLETED));
         holder.username.setText(String.format(holder.itemView.getResources().getString(R.string.fmt_order_username), order.getUsername()));
         holder.detail.setText(String.format(holder.itemView.getResources().getString(R.string.fmt_order_detail), order.getName(), order.getCount()));
     }
@@ -43,11 +45,13 @@ public class ReservationRecyclerAdapter extends RecyclerView.Adapter<Reservation
 
     static class ReservationRecyclerViewHolder extends RecyclerView.ViewHolder {
 
+        private CheckBox completed;
         private TextView username;
         private TextView detail;
 
         public ReservationRecyclerViewHolder(View itemView) {
             super(itemView);
+            completed = itemView.findViewById(R.id.card_order_check_completed);
             username = itemView.findViewById(R.id.card_order_username);
             detail = itemView.findViewById(R.id.card_order_detail);
         }
