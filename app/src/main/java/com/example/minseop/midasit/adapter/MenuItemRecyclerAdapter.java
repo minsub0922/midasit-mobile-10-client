@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.minseop.midasit.R;
+import com.example.minseop.midasit.model.MenuModel;
 
 import java.util.List;
 
@@ -25,10 +26,10 @@ import java.util.List;
 
 public class MenuItemRecyclerAdapter extends RecyclerView.Adapter<MenuItemRecyclerAdapter.MenuItemViewHolder>  {
 
-    List<com.example.minseop.midasit.Item.MenuItem> items;
+    List<MenuModel> items;
     Context context;
 
-    public MenuItemRecyclerAdapter(Context context, List<com.example.minseop.midasit.Item.MenuItem> items){
+    public MenuItemRecyclerAdapter(Context context, List<MenuModel> items){
         this.context = context;
         this.items = items;
     }
@@ -45,14 +46,14 @@ public class MenuItemRecyclerAdapter extends RecyclerView.Adapter<MenuItemRecycl
 
     @Override
     public void onBindViewHolder(@NonNull MenuItemViewHolder holder, int position) {
-        final com.example.minseop.midasit.Item.MenuItem item =  items.get(position);
+        final MenuModel item =  items.get(position);
 
-        Glide.with(context).load(item.getImgResource()).into(holder.image);
-        holder.title.setText(item.getTitle());
+//        Glide.with(context).load(item.getImgResource()).into(holder.image);
+        holder.title.setText(item.getName());
         holder.cardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, item.getTitle(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, item.getName(), Toast.LENGTH_SHORT).show();
             }
         });
     }
