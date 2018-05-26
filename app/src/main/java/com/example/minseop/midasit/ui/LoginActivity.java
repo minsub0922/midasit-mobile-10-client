@@ -26,6 +26,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+
 public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = LoginActivity.class.getSimpleName();
@@ -42,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         setupInputs();
         setupSigninButton();
     }
+
 
     private void setupInputs() {
         employeeNumber = findViewById(R.id.login_employee_number);

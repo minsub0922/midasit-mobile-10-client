@@ -3,18 +3,23 @@ package com.example.minseop.midasit.ui.customer;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Switch;
 
+import com.example.minseop.midasit.MidasCafeApplication;
 import com.example.minseop.midasit.MidasCafeConstants;
 import com.example.minseop.midasit.R;
-import com.example.minseop.midasit.model.ShoppingCartModel;
+import com.example.minseop.midasit.model.ShoppingCartItem;
 import com.example.minseop.midasit.retrofit.ShoppingCartService;
 
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -27,14 +32,15 @@ public class OrderActivity extends AppCompatActivity {
     private Switch iceSwitch;
     private Switch syrupSwitch;
     private Switch whippingSwitch;
+    private EditText countEditText;
 
     private Button payNowButton;
     private Button storeShooppingButton;
     private int size = 0;//tall = 0, grande = 1, venti = 2
-    boolean ice = false;
-    boolean syrup = false;
-    boolean cream = false;
-
+    private boolean ice = false;
+    private boolean syrup = false;
+    private boolean whipping = false;
+    private static final String TAG = OrderActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,15 +74,33 @@ public class OrderActivity extends AppCompatActivity {
                         .build();
                 final ShoppingCartService ShoppingService = retrofit.create(ShoppingCartService.class);
 
-                ShoppingCartModel shoppingCartModel = new ShoppingCartModel();
-                shoppingCartModel.setSize(size);
-                shoppingCartModel.setCream(cream);
-                shoppingCartModel.setIce(ice);
-                shoppingCartModel.setSyrup(syrup);
-                final Call<ShoppingCartModel> ShoppingListCall = ShoppingService.add(shoppingCartModel);
-                //enqueue
+                countEditText = findViewById(R.id.order_count_editText);
 
+                ShoppingCartItem tmpshoppingCartItem = new ShoppingCartItem();
+                tmpshoppingCartItem.setMenuId(1);
+                tmpshoppingCartItem.setCount(Integer.parseInt(countEditText.getText().toString()));
+                tmpshoppingCartItem.setSize(size);
+                tmpshoppingCartItem.setWhipping(whipping);
+                tmpshoppingCartItem.setIce(ice);
+                tmpshoppingCartItem.setSyrup(syrup);
 
+                Log.d("int"," "+Integer.parseInt(countEditText.getText().toString()));
+
+               // final Call<ShoppingCartItem> ShoppingListCall = ShoppingService.addShoppingCartItem( MidasCafeApplication.getInstance().getAuthModel().getId(),tmpshoppingCartItem);
+
+                final Call<ShoppingCartItem> ShoppingListCall = ShoppingService.addShoppingCartItem( 1,tmpshoppingCartItem);
+                ShoppingListCall.enqueue(new Callback<ShoppingCartItem>() {
+                    @Override
+                    public void onResponse(Call<ShoppingCartItem> call, Response<ShoppingCartItem> response) {
+                        final ShoppingCartItem shoppingCartItem1 = response.body();
+                        Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
+                    }
+
+                    @Override
+                    public void onFailure(Call<ShoppingCartItem> call, Throwable t) {
+                        Log.d(TAG, "fail");
+                    }
+                });
             }
         });
 
@@ -166,9 +190,9 @@ public class OrderActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton button, boolean isChecked) {
                 // TODO(@gihwan)
                 if (isChecked) {
-                    cream = true;
+                    whipping = true;
                 } else {
-                    cream = false;
+                    whipping = false;
                 }
             }
         });
