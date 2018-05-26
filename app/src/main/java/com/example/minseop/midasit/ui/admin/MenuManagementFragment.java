@@ -99,7 +99,7 @@ public class MenuManagementFragment extends Fragment {
         beverageMenuRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         beverageMenuRecyclerView.setNestedScrollingEnabled(false);
         beverageMenuRecyclerView.setVisibility(View.GONE);
-        txt_title2.setOnClickListener(new View.OnClickListener() {
+        txt_title3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (beverageMenuRecyclerView.getVisibility()==View.VISIBLE){
