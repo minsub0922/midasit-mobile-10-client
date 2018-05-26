@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\WON\StudioProjects\new\midasit-mobile-10-client\app\app.iml" filepath="C:\Users\WON\StudioProjects\new\midasit-mobile-10-client\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/midasit-mobile-10-client.iml" filepath="$PROJECT_DIR$/midasit-mobile-10-client.iml" />
+      <module fileurl="file://C:\Users\WON\StudioProjects\new\midasit-mobile-10-client\midasit-mobile-10-client.iml" filepath="C:\Users\WON\StudioProjects\new\midasit-mobile-10-client\midasit-mobile-10-client.iml" />
     </modules>
   </component>
 </project>

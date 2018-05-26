@@ -1,5 +1,6 @@
 package com.example.minseop.midasit.ui.adapter;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.minseop.midasit.R;
 import com.example.minseop.midasit.model.Account;
+import com.example.minseop.midasit.ui.admin.DetailUserManagementActivity;
 
 import java.util.List;
 
@@ -34,6 +36,7 @@ public class UserRecyclerAdapter extends RecyclerView.Adapter<UserRecyclerAdapte
 
         holder.username.setText(account.getUsername());
         holder.employeeNumber.setText(account.getEmployeeNumber());
+        holder.id = account.getId();
     }
 
     @Override
@@ -45,11 +48,24 @@ public class UserRecyclerAdapter extends RecyclerView.Adapter<UserRecyclerAdapte
 
         private TextView username;
         private TextView employeeNumber;
+        int id;
 
-        public UserRecyclerViewHolder(View itemView) {
+        public UserRecyclerViewHolder(final View itemView) {
             super(itemView);
             username = itemView.findViewById(R.id.card_user_management_username);
             employeeNumber = itemView.findViewById(R.id.card_user_management_employee_number);
+
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(itemView.getContext(), DetailUserManagementActivity.class);
+                    intent.putExtra("username",username.getText().toString());
+                    intent.putExtra("employeenumber",employeeNumber.getText().toString());
+                    intent.putExtra("id",id);
+                    itemView.getContext().startActivity(intent);
+                }
+            });
         }
     }
 
