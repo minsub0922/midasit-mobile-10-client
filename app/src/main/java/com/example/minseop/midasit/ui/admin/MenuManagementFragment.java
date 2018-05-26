@@ -1,5 +1,6 @@
 package com.example.minseop.midasit.ui.admin;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -73,6 +74,13 @@ public class MenuManagementFragment extends Fragment {
             });
         }
 
+        faAddMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), DetailedMenuManagementActivity.class));
+            }
+        });
+
         txt_title1 = view.findViewById(R.id.txt_title1);
         txt_title2 = view.findViewById(R.id.txt_title2);
         txt_title3 = view.findViewById(R.id.txt_title3);
@@ -92,12 +100,6 @@ public class MenuManagementFragment extends Fragment {
                 }else{
                     coffeeMenuRecyclerView.setVisibility(View.VISIBLE);
                 }
-            }
-        });
-        coffeeMenuRecyclerView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
             }
         });
 
