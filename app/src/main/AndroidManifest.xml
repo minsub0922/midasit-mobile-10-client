@@ -18,12 +18,14 @@
         <activity android:name=".Activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".Activity.MainActivity" />
-        <activity android:name=".Activity.MenuDetailActivity"/>
+        <activity android:name=".Activity.MenuDetailActivity" />
         <activity android:name=".Activity.OrderActivity" />
+        <activity android:name=".ui.admin.AdminMainActivity"></activity>
     </application>
 
 </manifest>

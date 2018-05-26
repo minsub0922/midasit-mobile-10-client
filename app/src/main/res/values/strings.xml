@@ -20,4 +20,7 @@
     <string name="signin">로그인</string>
     <string name="failed_to_signin">로그인을 실패하였습니다.</string>
     <string name="incorrect_password">사원 번호 및 비밀번호가 올바르지 않습니다.</string>
+    <string name="menu_management">메뉴 관리</string>
+    <string name="user_management">회원 관리</string>
+    <string name="reservation_management">예약 관리</string>
 </resources>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/admin_bottom_navigation_action_reservaion_management"
+        android:icon="@drawable/baseline_event_note_24"
+        android:title="@string/reservation_management" />
+
+    <item
+        android:id="@+id/admin_bottom_navigation_action_menu_management"
+        android:icon="@drawable/baseline_local_cafe_24"
+        android:title="@string/menu_management" />
+
+    <item
+        android:id="@+id/admin_bottom_navigation_action_user_management"
+        android:icon="@drawable/baseline_person_24"
+        android:title="@string/user_management" />
+
+</menu>

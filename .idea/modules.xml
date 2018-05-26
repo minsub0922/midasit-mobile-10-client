@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/midasit.iml" filepath="$PROJECT_DIR$/midasit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/midasit-mobile-10-client.iml" filepath="$PROJECT_DIR$/midasit-mobile-10-client.iml" />
     </modules>
   </component>
 </project>
