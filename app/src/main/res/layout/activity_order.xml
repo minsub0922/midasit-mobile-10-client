@@ -65,11 +65,12 @@
 
             <Button
                 android:id="@+id/order_size_tall_button"
-                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/activity_margin_narrow"
+                android:layout_margin="0dp"
                 android:padding="@dimen/activity_margin_narrow"
+
                 android:text="@string/size_tall"
                 app:layout_constraintEnd_toStartOf="@id/order_size_grande_button"
                 app:layout_constraintStart_toStartOf="parent"
@@ -80,7 +81,7 @@
                 style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/activity_margin_narrow"
+                android:layout_margin="0dp"
                 android:padding="@dimen/activity_margin_narrow"
                 android:text="@string/size_grande"
                 app:layout_constraintEnd_toStartOf="@id/order_size_venti_button"
@@ -89,10 +90,10 @@
 
             <Button
                 android:id="@+id/order_size_venti_button"
-                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/activity_margin_narrow"
+                android:layout_margin="0dp"
                 android:padding="@dimen/activity_margin_narrow"
                 android:text="@string/size_venti"
                 app:layout_constraintEnd_toEndOf="parent"
