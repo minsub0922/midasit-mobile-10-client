@@ -1,23 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#4466bb"
-    android:paddingBottom="16dp"
-    android:paddingLeft="50dp"
-    android:paddingRight="50dp"
-    android:paddingTop="16dp"
+    android:background="@color/colorBackground"
     android:theme="@style/Theme.AppCompat.NoActionBar"
-    >
+    tools:context=".Activity.MainActivity">
 
-    <TextView
-        android:textSize="40dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="hello world!"/>
+    <include
+        android:id="@+id/main_app_bar"
+        layout="@layout/main_app_bar" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/main_view_pager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/main_bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_app_bar" />
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/main_bottom_navigation"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/bottom_navigation_height"
+        android:background="@color/colorAppBar"
+        app:elevation="8dp"
+        app:itemIconTint="@color/bottom_navigation"
+        app:itemTextColor="@color/bottom_navigation"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_navigation" />
 
 </android.support.constraint.ConstraintLayout>
