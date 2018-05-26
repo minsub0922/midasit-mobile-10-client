@@ -1,10 +1,13 @@
 package com.example.minseop.midasit.retrofit;
 
-import com.example.minseop.midasit.model.ShoppingCartModel;
+import com.example.minseop.midasit.model.ShoppingCartItem;
+import com.example.minseop.midasit.model.ShoppingCartResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 /**
  * Created by WON on 2018-05-26.
@@ -12,7 +15,10 @@ import retrofit2.http.POST;
 
 public interface ShoppingCartService {
 
-    @POST("/shoppinglist")
-    Call<ShoppingCartModel> add(@Body ShoppingCartModel shoppingCartModel);
+    @POST("/shoppingcart//userid/{userId}")
+    Call<ShoppingCartItem> addShoppingCartItem(@Path("userId") int userId, @Body ShoppingCartItem shoppingCartItem);
+
+    @GET("/shoppingcart/userid/{userId}")
+    Call<ShoppingCartResponse> requestShoppingCartItemList(@Path("userId") int userId);
 
 }

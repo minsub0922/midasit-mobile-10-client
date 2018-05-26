@@ -1,5 +1,6 @@
 package com.example.minseop.midasit.ui.customer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -45,6 +46,8 @@ public class CustomerMainActivity extends AppCompatActivity {
         if (itemId == R.id.toolbar_action_notification) {
             return true;
         } else if (itemId == R.id.toolbar_action_shopping_cart) {
+            Intent intent = new Intent(CustomerMainActivity.this, CustomerShoppingCartActivity.class);
+            startActivity(intent);
             return true;
         }
 
@@ -79,7 +82,7 @@ public class CustomerMainActivity extends AppCompatActivity {
                 } else if (itemId == R.id.bottom_navigation_action_menu) {
                     return replaceViewPager(new MenuListFragment());
                 } else if (itemId == R.id.bottom_navigation_action_mypage) {
-                    return replaceViewPager(new MenuListFragment());
+                    return replaceViewPager(new CustomerProfileFragment());
                 }
 
                 return false;

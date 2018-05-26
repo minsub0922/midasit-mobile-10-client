@@ -27,4 +27,5 @@
     <string name="tea">차</string>
     <string name="beverage">음료</string>
     <string name="more">더 보기</string>
+    <string name="order">주문하기</string>
 </resources>
