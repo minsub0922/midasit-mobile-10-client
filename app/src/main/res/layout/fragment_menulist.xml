@@ -1,20 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:orientation="vertical"
+    android:padding="10dp"
     android:layout_height="match_parent">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="hihihi"
-        android:textSize="40dp"/>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerview"
-        android:background="#fcfcfc"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginEnd="4dp"
-        android:layout_marginStart="4dp" />
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_marginStart="11dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:text="Coffee"
+                />
+            <TextView
+                android:id="@+id/more1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:layout_gravity="end"
+                android:textColor="#673AB7"
+                android:layout_margin="5dp"
+                android:text="더보기"/>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerview1"
+                android:background="#fcfcfc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="20dp"/>
 
+            <TextView
+                android:layout_marginStart="11dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:text="TEA"
+                />
+            <TextView
+                android:id="@+id/more2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:layout_gravity="end"
+                android:textColor="#673AB7"
+                android:layout_margin="5dp"
+                android:text="더보기"/>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerview2"
+                android:background="#fcfcfc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="20dp"/>
+
+            <TextView
+                android:layout_marginStart="11dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:text="Beverage"
+                />
+            <TextView
+                android:id="@+id/more3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:layout_gravity="end"
+                android:textColor="#673AB7"
+                android:layout_margin="5dp"
+                android:text="더보기"/>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerview3"
+                android:background="#fcfcfc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="20dp"/>
+         </LinearLayout>
+    </ScrollView>
 </LinearLayout>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView android:id="@+id/cardview"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="5dp"
+    android:layout_width="100dp"
+    android:layout_height="130dp"
+    android:layout_margin="7dp"
     card_view:cardCornerRadius="5dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto">
@@ -16,13 +16,15 @@
         <ImageView
             android:id="@+id/image"
             android:layout_width="match_parent"
-            android:layout_height="210dp" />
+            android:layout_height="90dp"
+            android:layout_marginBottom="5dp"/>
 
         <TextView
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:textSize="11dp"
+            android:textAlignment="center"
             android:text="test" />
 
     </LinearLayout>
