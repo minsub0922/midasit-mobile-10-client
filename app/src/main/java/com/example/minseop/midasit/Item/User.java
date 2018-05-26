@@ -5,9 +5,14 @@ package com.example.minseop.midasit.Item;
  */
 
 public class User {
+    String key;
     String id;
+
+
     String pwd;
     String username;
+    int admin;
+
 
     public String getId() {
         return id;

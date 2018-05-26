@@ -4,6 +4,7 @@ package com.example.minseop.midasit.Activity;
  * Created by minseop on 2018-05-25.
  */
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -36,6 +37,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     Button btn_check, btn_submit;
     private static final String BASE = "http://172.30.1.229:3001";
 
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

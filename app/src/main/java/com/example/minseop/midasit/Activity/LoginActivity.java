@@ -47,12 +47,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         btn_login.setOnClickListener(this);
         txt_signup.setOnClickListener(this);
-        txt_signup.setText(Html.fromHtml("<u>" + "Signup" + "</u>"));
+        txt_signup.setText(Html.fromHtml("<u>" + "Click" + "</u>"));
     }
 
     @Override
     public void onClick(View view) {
-        startActivity(new Intent(LoginActivity.this, TestActivity.class));
         if (view.getId()==R.id.btn_login) {
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(BASE)

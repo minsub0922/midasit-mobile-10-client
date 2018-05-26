@@ -2,6 +2,7 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
@@ -17,18 +18,18 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
     <android.support.design.widget.TextInputLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:textColorHint="#444444"
-        android:layout_weight="7"
         android:layout_height="match_parent">
         <EditText
             android:id="@+id/edt_id"
+            android:layout_marginRight="60dp"
             android:backgroundTint="#444444"
             android:textColor="#444444"
             android:textColorHint="#444444"
@@ -44,15 +45,22 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"/>
-        <Button
+
+        <TextView
             android:id="@+id/btn_check"
             android:layout_width="wrap_content"
-            android:textSize="11dp"
-            android:background="@drawable/button_style2"
-            android:text="중복체크"
             android:layout_height="wrap_content"
-           />
-    </LinearLayout>
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:text="중복체크"
+            android:textColor="#224499"
+            android:textSize="14dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_weight="1"

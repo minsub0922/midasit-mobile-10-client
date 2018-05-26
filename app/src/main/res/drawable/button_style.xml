@@ -29,7 +29,7 @@
     </item>
     <item android:state_enabled="true">
         <shape>
-            <solid android:color="#5577cc" />
+            <solid android:color="#673AB7" />
             <stroke
                 android:width="0dp" android:color="#000000"/>
 
