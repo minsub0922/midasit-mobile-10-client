@@ -1,97 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:padding="10dp"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="@dimen/activity_margin"
         android:scrollbars="none">
 
-        <LinearLayout
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
             <TextView
-                android:layout_marginStart="11dp"
-                android:layout_width="wrap_content"
+                android:id="@+id/fragment_menulist_coffee_header"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:text="Coffee" />
+                android:paddingEnd="@dimen/activity_margin"
+                android:paddingStart="@dimen/activity_margin"
+                android:text="@string/coffee"
+                android:textColor="@color/textColorDarkPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/fragment_menulist_coffee_recycler"
+                app:layout_constraintEnd_toStartOf="@id/fragment_menulist_coffee_more_button"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/menu_list_more_coffee"
+            <Button
+                android:id="@+id/fragment_menulist_coffee_more_button"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12dp"
-                android:layout_gravity="end"
-                android:textColor="#673AB7"
-                android:layout_margin="5dp"
-                android:text="더보기" />
+                android:text="@string/more"
+                app:layout_constraintBottom_toTopOf="@id/fragment_menulist_coffee_recycler"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toEndOf="@id/fragment_menulist_coffee_header"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerview1"
-                android:background="#fcfcfc"
-                android:layout_width="match_parent"
+                android:id="@+id/fragment_menulist_coffee_recycler"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginBottom="20dp" />
+                android:layout_marginTop="@dimen/activity_margin_narrow"
+                app:layout_constraintBottom_toTopOf="@id/fragment_menulist_tea_header"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragment_menulist_coffee_header" />
 
             <TextView
-                android:layout_marginStart="11dp"
-                android:layout_width="wrap_content"
+                android:id="@+id/fragment_menulist_tea_header"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:text="TEA" />
+                android:layout_marginTop="@dimen/activity_margin"
+                android:paddingEnd="@dimen/activity_margin"
+                android:paddingStart="@dimen/activity_margin"
+                android:text="@string/tea"
+                android:textColor="@color/textColorDarkPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/fragment_menulist_tea_recycler"
+                app:layout_constraintEnd_toStartOf="@id/fragment_menulist_tea_more_button"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragment_menulist_coffee_recycler" />
 
-            <TextView
-                android:id="@+id/menu_list_more_tea"
+            <Button
+                android:id="@+id/fragment_menulist_tea_more_button"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12dp"
-                android:layout_gravity="end"
-                android:textColor="#673AB7"
-                android:layout_margin="5dp"
-                android:text="더보기" />
+                android:text="@string/more"
+                app:layout_constraintBottom_toTopOf="@id/fragment_menulist_tea_recycler"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toEndOf="@id/fragment_menulist_tea_header"
+                app:layout_constraintTop_toBottomOf="@id/fragment_menulist_coffee_recycler" />
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerview2"
-                android:background="#fcfcfc"
-                android:layout_width="match_parent"
+                android:id="@+id/fragment_menulist_tea_recycler"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginBottom="20dp" />
+                android:layout_marginTop="@dimen/activity_margin_narrow"
+                app:layout_constraintBottom_toTopOf="@id/fragment_menulist_beverage_header"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragment_menulist_tea_header" />
 
             <TextView
-                android:layout_marginStart="11dp"
-                android:layout_width="wrap_content"
+                android:id="@+id/fragment_menulist_beverage_header"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:text="Beverage" />
+                android:layout_marginTop="@dimen/activity_margin"
+                android:paddingEnd="@dimen/activity_margin"
+                android:paddingStart="@dimen/activity_margin"
+                android:text="@string/beverage"
+                android:textColor="@color/textColorDarkPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/fragment_menulist_beverage_recycler"
+                app:layout_constraintEnd_toStartOf="@id/fragment_menulist_beverage_more_button"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragment_menulist_tea_recycler" />
 
-            <TextView
-                android:id="@+id/menu_list_more_beverage"
+            <Button
+                android:id="@+id/fragment_menulist_beverage_more_button"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12dp"
-                android:layout_gravity="end"
-                android:textColor="#673AB7"
-                android:layout_margin="5dp"
-                android:text="더보기" />
+                android:text="@string/more"
+                app:layout_constraintBottom_toTopOf="@id/fragment_menulist_beverage_recycler"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toEndOf="@id/fragment_menulist_beverage_header"
+                app:layout_constraintTop_toBottomOf="@id/fragment_menulist_tea_recycler" />
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerview3"
-                android:background="#fcfcfc"
-                android:layout_width="match_parent"
+                android:id="@+id/fragment_menulist_beverage_recycler"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginBottom="20dp" />
-        </LinearLayout>
-    </ScrollView>
+                android:layout_marginTop="@dimen/activity_margin_narrow"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragment_menulist_beverage_header" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
 </LinearLayout>

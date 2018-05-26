@@ -10,7 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Button;
 
 import com.example.minseop.midasit.MidasCafeConstants;
 import com.example.minseop.midasit.R;
@@ -39,15 +39,15 @@ public class MenuListFragment extends Fragment implements View.OnClickListener {
 
     private MenuItemRecyclerAdapter coffeeMenuListAdapter;
     private RecyclerView coffeeMenuRecyclerView;
-    private TextView moreCoffeeMenuList;
+    private Button moreCoffeeMenuButton;
 
     private MenuItemRecyclerAdapter teaMenuListAdapter;
     private RecyclerView teaMenuRecyclerView;
-    private TextView moreTeaMenuList;
+    private Button moreTeaMenuButton;
 
     private MenuItemRecyclerAdapter beverageMenuListAdapter;
     private RecyclerView beverageMenuRecyclerView;
-    private TextView moreBeverageMenuList;
+    private Button moreBeverageMenuButton;
 
     private final List<MenuModel> coffeeMenuList = new ArrayList<>();
     private final List<MenuModel> teaMenuList = new ArrayList<>();
@@ -58,25 +58,24 @@ public class MenuListFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_menulist, container, false);
 
-        moreCoffeeMenuList = view.findViewById(R.id.menu_list_more_coffee);
-        moreCoffeeMenuList.setOnClickListener(this);
-        moreTeaMenuList = view.findViewById(R.id.menu_list_more_tea);
-        moreTeaMenuList.setOnClickListener(this);
-        moreBeverageMenuList = view.findViewById(R.id.menu_list_more_beverage);
-        moreBeverageMenuList.setOnClickListener(this);
+        moreCoffeeMenuButton = view.findViewById(R.id.fragment_menulist_coffee_more_button);
+        moreCoffeeMenuButton.setOnClickListener(this);
+        moreTeaMenuButton = view.findViewById(R.id.fragment_menulist_tea_more_button);
+        moreTeaMenuButton.setOnClickListener(this);
+        moreBeverageMenuButton = view.findViewById(R.id.fragment_menulist_beverage_more_button);
+        moreBeverageMenuButton.setOnClickListener(this);
 
-
-        coffeeMenuRecyclerView = view.findViewById(R.id.recyclerview1);
+        coffeeMenuRecyclerView = view.findViewById(R.id.fragment_menulist_coffee_recycler);
         coffeeMenuListAdapter = new MenuItemRecyclerAdapter(getActivity(), coffeeMenuList);
         coffeeMenuRecyclerView.setAdapter(coffeeMenuListAdapter);
         coffeeMenuRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
 
-        teaMenuRecyclerView = view.findViewById(R.id.recyclerview2);
+        teaMenuRecyclerView = view.findViewById(R.id.fragment_menulist_tea_recycler);
         teaMenuListAdapter = new MenuItemRecyclerAdapter(getActivity(), teaMenuList);
         teaMenuRecyclerView.setAdapter(teaMenuListAdapter);
         teaMenuRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
 
-        beverageMenuRecyclerView = view.findViewById(R.id.recyclerview3);
+        beverageMenuRecyclerView = view.findViewById(R.id.fragment_menulist_beverage_recycler);
         beverageMenuListAdapter = new MenuItemRecyclerAdapter(getActivity(), beverageMenuList);
         beverageMenuRecyclerView.setAdapter(beverageMenuListAdapter);
         beverageMenuRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
@@ -176,15 +175,12 @@ public class MenuListFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         Intent intent = new Intent(getActivity(), MenuDetailActivity.class);
 
-        if (v.getId() == R.id.menu_list_more_coffee) {
+        if (v.getId() == R.id.fragment_menulist_coffee_more_button) {
             intent.putExtra("category", MenuCategory.COFFEE.toString());
-            intent.putExtra("title", "Coffee");
-        } else if (v.getId() == R.id.menu_list_more_tea) {
+        } else if (v.getId() == R.id.fragment_menulist_tea_more_button) {
             intent.putExtra("category", MenuCategory.TEA.toString());
-            intent.putExtra("title", "Tea");
-        } else if (v.getId() == R.id.menu_list_more_beverage) {
+        } else if (v.getId() == R.id.fragment_menulist_beverage_more_button) {
             intent.putExtra("category", MenuCategory.BEVERAGE.toString());
-            intent.putExtra("title", "Beverage");
         }
 
         startActivity(intent);

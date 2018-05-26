@@ -1,7 +1,5 @@
 package com.example.minseop.midasit.ui.customer;
 
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -36,7 +34,7 @@ public class MenuDetailActivity extends AppCompatActivity {
 
     private static final String TAG = MenuDetailActivity.class.getSimpleName();
 
-    private Intent intent;
+    private MenuCategory category;
     private RecyclerView recyclerView;
     private MenuItemGridAdapter adapter;
     private List<MenuModel> data = new ArrayList<>();
@@ -45,23 +43,17 @@ public class MenuDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        recyclerView = findViewById(R.id.recyclerview);
 
-        adapter = new MenuItemGridAdapter(MenuDetailActivity.this, data);
-        recyclerView.setAdapter(adapter);
+        category = MenuCategory.valueOf(getIntent().getStringExtra("category"));
 
-        GridLayoutManager mGridLayoutManager = new GridLayoutManager(MenuDetailActivity.this, 2);
-        recyclerView.setLayoutManager(mGridLayoutManager);
-
-        intent = getIntent();
         setupAppBar();
+        setupRecycler();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
-        final MenuCategory category = MenuCategory.valueOf(getIntent().getStringExtra("category"));
         final Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(MidasCafeConstants.SERVER_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -96,15 +88,33 @@ public class MenuDetailActivity extends AppCompatActivity {
     }
 
     private void setupAppBar() {
-        Toolbar toolbar = findViewById(R.id.main_toolbar);
+        Toolbar toolbar = findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setBackgroundColor(Color.parseColor("#673AB7"));
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle(intent.getStringExtra("title"));
+
+            switch (category) {
+                case COFFEE:
+                    getSupportActionBar().setTitle(R.string.coffee);
+                    break;
+                case TEA:
+                    getSupportActionBar().setTitle(R.string.tea);
+                    break;
+                case BEVERAGE:
+                    getSupportActionBar().setTitle(R.string.beverage);
+                    break;
+            }
         }
+    }
+
+    private void setupRecycler() {
+        recyclerView = findViewById(R.id.detail_recycler);
+        recyclerView.setLayoutManager(new GridLayoutManager(MenuDetailActivity.this, 2));
+
+        adapter = new MenuItemGridAdapter(MenuDetailActivity.this, data);
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
