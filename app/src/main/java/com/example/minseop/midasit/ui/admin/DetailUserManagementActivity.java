@@ -6,15 +6,21 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 
 import com.example.minseop.midasit.MidasCafeConstants;
 import com.example.minseop.midasit.R;
+import com.example.minseop.midasit.model.Account;
 import com.example.minseop.midasit.model.AuthRequest;
 import com.example.minseop.midasit.model.ResponseModel;
 import com.example.minseop.midasit.retrofit.AccountManagementService;
 import com.example.minseop.midasit.retrofit.AuthService;
+
+import org.joda.time.DateTime;
+
+import java.sql.Timestamp;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,7 +33,7 @@ public class DetailUserManagementActivity extends AppCompatActivity {
     EditText username,password,employeenumber;
     Switch adminSwitch;
     Button deleteButton, fixButton, cancelButton;
-    int id;
+    int id,admin;
     String Spassword, Susername,SemployeeNumber;
     private static final String TAG = DetailUserManagementActivity.class.getSimpleName();
 
@@ -47,6 +53,18 @@ public class DetailUserManagementActivity extends AppCompatActivity {
         Spassword = intent.getStringExtra("password");
         Susername = intent.getStringExtra("username");
         SemployeeNumber = intent.getStringExtra("employeenumber");
+
+        adminSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton button, boolean isChecked) {
+            // TODO(@gihwan)
+            if (isChecked) {
+                admin = 1;
+            } else {
+                admin = 0;
+            }
+        }
+    });
 
         username.setText(Susername);
         password.setText(Spassword);
@@ -92,7 +110,44 @@ public class DetailUserManagementActivity extends AppCompatActivity {
         fixButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SemployeeNumber = employeenumber.getText().toString();
+                Susername = username.getText().toString();
+                Account account = new Account(id,SemployeeNumber,Susername,admin, DateTime.now());
 
+                final Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl(MidasCafeConstants.SERVER_URL)
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+                final AccountManagementService accountManagementService = retrofit.create(AccountManagementService.class);
+                final Call<ResponseModel> responseModelCall = accountManagementService.deleteAccount(id);
+                responseModelCall.enqueue(new Callback<ResponseModel>() {
+                    @Override
+                    public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                        Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
+                        Intent intent = new Intent(DetailUserManagementActivity.this, AdminMainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                    @Override
+                    public void onFailure(Call<ResponseModel> call, Throwable t) {
+                        Log.d(TAG, "onFailure() called with: call = [" + call + "], t = [" + t + "]");
+                    }
+                });
+
+                final Call<ResponseModel> responseModelCall2 = accountManagementService.insertAccount(account);
+                responseModelCall2.enqueue(new Callback<ResponseModel>() {
+                    @Override
+                    public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                        Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
+                        Intent intent = new Intent(DetailUserManagementActivity.this, AdminMainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                    @Override
+                    public void onFailure(Call<ResponseModel> call, Throwable t) {
+                        Log.d(TAG, "onFailure() called with: call = [" + call + "], t = [" + t + "]");
+                    }
+                });
             }
         });
 
