@@ -61,8 +61,8 @@ public class ReservationManagementFragment extends Fragment {
                 .baseUrl(MidasCafeConstants.SERVER_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        retrofit.create(OrderService.class)
-                .getAllReservations()
+        final OrderService orderService = retrofit.create(OrderService.class);
+        orderService.getAllReservations()
                 .enqueue(new Callback<OrderResponse>() {
                     @Override
                     public void onResponse(@NonNull Call<OrderResponse> call, @NonNull Response<OrderResponse> response) {
@@ -75,6 +75,28 @@ public class ReservationManagementFragment extends Fragment {
                             doingOrders.addAll(orderResponse.getOrders());
 
                             doingRecyclerAdapter.notifyDataSetChanged();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<OrderResponse> call, @NonNull Throwable t) {
+                        // TODO(@gihwan)
+                        Log.d(TAG, "onFailure() called with: call = [" + call + "], t = [" + t + "]");
+                    }
+                });
+        orderService.getAllCompleteds()
+                .enqueue(new Callback<OrderResponse>() {
+                    @Override
+                    public void onResponse(@NonNull Call<OrderResponse> call, @NonNull Response<OrderResponse> response) {
+                        Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
+                        final OrderResponse orderResponse = response.body();
+                        if (orderResponse == null) {
+                            // TODO(@gihwan)
+                        } else {
+                            doneOrders.clear();
+                            doneOrders.addAll(orderResponse.getOrders());
+
+                            doneRecyclerAdapter.notifyDataSetChanged();
                         }
                     }
 

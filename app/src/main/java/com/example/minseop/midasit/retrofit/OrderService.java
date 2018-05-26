@@ -14,4 +14,7 @@ public interface OrderService {
     @GET("/order/reservation/userid/{userId}")
     Call<OrderResponse> getAllReserationByUserId(@Path("userId") int userId);
 
+    @GET("/order/completeds")
+    Call<OrderResponse> getAllCompleteds();
+
 }
