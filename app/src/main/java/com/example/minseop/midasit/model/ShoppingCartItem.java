@@ -12,6 +12,9 @@ public class ShoppingCartItem extends ResponseModel {
     private int ice;
     private int syrup;
     private int whipping;
+    private String name;
+    private int price;
+    private String image;
 
     public int getUserId() {
         return userId;
@@ -61,6 +64,30 @@ public class ShoppingCartItem extends ResponseModel {
         this.whipping = whipping ? 1 : 0;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("ShoppingCartItem{");
@@ -72,6 +99,9 @@ public class ShoppingCartItem extends ResponseModel {
         sb.append(", ice=").append(ice);
         sb.append(", syrup=").append(syrup);
         sb.append(", whipping=").append(whipping);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", price=").append(price);
+        sb.append(", image='").append(image).append('\'');
         sb.append('}');
         return sb.toString();
     }

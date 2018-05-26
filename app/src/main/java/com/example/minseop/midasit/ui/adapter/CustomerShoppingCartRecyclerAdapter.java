@@ -31,7 +31,8 @@ public class CustomerShoppingCartRecyclerAdapter extends RecyclerView.Adapter<Cu
 
     @Override
     public void onBindViewHolder(@NonNull CustomerShoppingCartViewHolder holder, int position) {
-        holder.menuName.setText("아메리카노~");
+        final ShoppingCartItem shoppingCartItem = shoppingCart.get(position);
+        holder.menuName.setText(shoppingCartItem.getName());
         holder.menuImage.setImageDrawable(holder.itemView.getResources().getDrawable(R.drawable.ic_launcher_foreground));
     }
 
