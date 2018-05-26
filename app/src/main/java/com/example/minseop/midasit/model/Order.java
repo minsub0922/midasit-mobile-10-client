@@ -18,6 +18,16 @@ public class Order {
     private String image;
     private String username;
 
+    public Order(int userId, int menuId, String status, int count, boolean ice, boolean syrup, boolean whipping) {
+        this.userId = userId;
+        this.menuId = menuId;
+        this.status = status;
+        this.count = count;
+        this.ice = ice ? 1 : 0;
+        this.syrup = syrup ? 1 : 0;
+        this.whipping = whipping ? 1 : 0;
+    }
+
     public int getUserId() {
         return userId;
     }
