@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.OrderActivity">
+    tools:context=".ui.customer.OrderActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/order_app_bar"

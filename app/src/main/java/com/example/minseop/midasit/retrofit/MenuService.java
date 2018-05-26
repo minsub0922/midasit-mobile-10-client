@@ -1,4 +1,4 @@
-package com.example.minseop.midasit.Service;
+package com.example.minseop.midasit.retrofit;
 
 import com.example.minseop.midasit.model.MenuCategory;
 import com.example.minseop.midasit.model.MenuListResponseModel;

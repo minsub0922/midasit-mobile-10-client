@@ -1,4 +1,4 @@
-package com.example.minseop.midasit.fragment;
+package com.example.minseop.midasit.ui.customer;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,14 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.minseop.midasit.Activity.MenuDetailActivity;
 import com.example.minseop.midasit.MidasCafeConstants;
 import com.example.minseop.midasit.R;
-import com.example.minseop.midasit.Service.MenuService;
-import com.example.minseop.midasit.adapter.MenuItemRecyclerAdapter;
 import com.example.minseop.midasit.model.MenuCategory;
 import com.example.minseop.midasit.model.MenuListResponseModel;
 import com.example.minseop.midasit.model.MenuModel;
+import com.example.minseop.midasit.retrofit.MenuService;
+import com.example.minseop.midasit.ui.adapter.MenuItemRecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -178,13 +177,13 @@ public class MenuListFragment extends Fragment implements View.OnClickListener {
         Intent intent = new Intent(getActivity(), MenuDetailActivity.class);
 
         if (v.getId() == R.id.menu_list_more_coffee) {
-            intent.putExtra("category", MenuCategory.COFFEE);
+            intent.putExtra("category", MenuCategory.COFFEE.toString());
             intent.putExtra("title", "Coffee");
         } else if (v.getId() == R.id.menu_list_more_tea) {
-            intent.putExtra("category", MenuCategory.TEA);
+            intent.putExtra("category", MenuCategory.TEA.toString());
             intent.putExtra("title", "Tea");
         } else if (v.getId() == R.id.menu_list_more_beverage) {
-            intent.putExtra("category", MenuCategory.BEVERAGE);
+            intent.putExtra("category", MenuCategory.BEVERAGE.toString());
             intent.putExtra("title", "Beverage");
         }
 

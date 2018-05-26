@@ -1,4 +1,4 @@
-package com.example.minseop.midasit.Activity;
+package com.example.minseop.midasit.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,11 +13,12 @@ import android.widget.Button;
 import com.example.minseop.midasit.MidasCafeApplication;
 import com.example.minseop.midasit.MidasCafeConstants;
 import com.example.minseop.midasit.R;
-import com.example.minseop.midasit.Service.AuthService;
 import com.example.minseop.midasit.model.AdministratorLevel;
 import com.example.minseop.midasit.model.AuthModel;
 import com.example.minseop.midasit.model.AuthRequest;
+import com.example.minseop.midasit.retrofit.AuthService;
 import com.example.minseop.midasit.ui.admin.AdminMainActivity;
+import com.example.minseop.midasit.ui.customer.CustomerMainActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -73,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
                                 MidasCafeApplication.getInstance().setAuthModel(authModel);
 
                                 if (authModel.getAdmin() == AdministratorLevel.EMPLOYEE.getValue()) {
-                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    Intent intent = new Intent(LoginActivity.this, CustomerMainActivity.class);
                                     startActivity(intent);
                                     finish();
                                 } else {

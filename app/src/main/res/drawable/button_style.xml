@@ -5,39 +5,24 @@
         <shape>
 
             <solid android:color="#224499" />
-            <stroke
-                android:width="0dip" android:color="#ffffff"/>
+            <stroke android:width="0dip" android:color="#ffffff" />
 
-            <padding
-                android:left="7dip"
-                android:right="7dip"
-                android:top="7dip"
-                android:bottom="7dip" />
+            <padding android:left="7dip" android:right="7dip" android:top="7dip" android:bottom="7dip" />
         </shape>
     </item>
     <item android:state_enabled="false">
         <shape>
-            <gradient
-                android:startColor="#ffffff" />
+            <gradient android:startColor="#ffffff" />
 
-            <padding
-                android:left="7dip"
-                android:right="7dip"
-                android:top="7dip"
-                android:bottom="7dip" />
+            <padding android:left="7dip" android:right="7dip" android:top="7dip" android:bottom="7dip" />
         </shape>
     </item>
     <item android:state_enabled="true">
         <shape>
             <solid android:color="#673AB7" />
-            <stroke
-                android:width="0dp" android:color="#000000"/>
+            <stroke android:width="0dp" android:color="#000000" />
 
-            <padding
-                android:left="7dip"
-                android:right="7dip"
-                android:top="7dip"
-                android:bottom="7dip" />
+            <padding android:left="7dip" android:right="7dip" android:top="7dip" android:bottom="7dip" />
         </shape>
     </item>
 </selector>

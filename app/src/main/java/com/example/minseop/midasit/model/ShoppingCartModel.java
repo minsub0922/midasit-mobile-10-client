@@ -4,7 +4,7 @@ package com.example.minseop.midasit.model;
  * Created by WON on 2018-05-26.
  */
 
-public class ShoppingListModel extends ResponseModel{
+public class ShoppingCartModel extends ResponseModel {
     private int id;
     private int size;
     private boolean ice;
@@ -53,7 +53,7 @@ public class ShoppingListModel extends ResponseModel{
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("ShoppingListModel{");
+        final StringBuilder sb = new StringBuilder("ShoppingCartModel{");
         sb.append("time=").append(time);
         sb.append(", success=").append(success);
         sb.append(", id=").append(id);

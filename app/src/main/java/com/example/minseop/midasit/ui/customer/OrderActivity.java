@@ -1,8 +1,8 @@
-package com.example.minseop.midasit.Activity;
+package com.example.minseop.midasit.ui.customer;
 
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -11,9 +11,8 @@ import android.widget.Switch;
 
 import com.example.minseop.midasit.MidasCafeConstants;
 import com.example.minseop.midasit.R;
-import com.example.minseop.midasit.Service.AuthService;
-import com.example.minseop.midasit.Service.ShoppingListService;
-import com.example.minseop.midasit.model.ShoppingListModel;
+import com.example.minseop.midasit.model.ShoppingCartModel;
+import com.example.minseop.midasit.retrofit.ShoppingCartService;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -67,16 +66,15 @@ public class OrderActivity extends AppCompatActivity {
                         .baseUrl(MidasCafeConstants.SERVER_URL)
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
-                final ShoppingListService ShoppingService = retrofit.create(ShoppingListService.class);
+                final ShoppingCartService ShoppingService = retrofit.create(ShoppingCartService.class);
 
-                ShoppingListModel shoppingListModel = new ShoppingListModel();
-                shoppingListModel.setSize(size);
-                shoppingListModel.setCream(cream);
-                shoppingListModel.setIce(ice);
-                shoppingListModel.setSyrup(syrup);
-                final Call<ShoppingListModel> ShoppingListCall = ShoppingService.add(shoppingListModel);
+                ShoppingCartModel shoppingCartModel = new ShoppingCartModel();
+                shoppingCartModel.setSize(size);
+                shoppingCartModel.setCream(cream);
+                shoppingCartModel.setIce(ice);
+                shoppingCartModel.setSyrup(syrup);
+                final Call<ShoppingCartModel> ShoppingListCall = ShoppingService.add(shoppingCartModel);
                 //enqueue
-
 
 
             }
@@ -137,12 +135,9 @@ public class OrderActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton button, boolean isChecked) {
                 // TODO(@gihwan)
-                if(isChecked)
-                {
+                if (isChecked) {
                     ice = true;
-                }
-                else
-                {
+                } else {
                     ice = false;
                 }
             }
@@ -155,12 +150,9 @@ public class OrderActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton button, boolean isChecked) {
                 // TODO(@gihwan)
-                if(isChecked)
-                {
+                if (isChecked) {
                     syrup = true;
-                }
-                else
-                {
+                } else {
                     syrup = false;
                 }
             }
@@ -173,18 +165,14 @@ public class OrderActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton button, boolean isChecked) {
                 // TODO(@gihwan)
-                if(isChecked)
-                {
+                if (isChecked) {
                     cream = true;
-                }
-                else
-                {
+                } else {
                     cream = false;
                 }
             }
         });
     }
-
 
 
 }

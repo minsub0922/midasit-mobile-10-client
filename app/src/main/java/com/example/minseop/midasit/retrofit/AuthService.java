@@ -1,4 +1,4 @@
-package com.example.minseop.midasit.Service;
+package com.example.minseop.midasit.retrofit;
 
 import com.example.minseop.midasit.model.AuthCheckExistenceModel;
 import com.example.minseop.midasit.model.AuthModel;

@@ -1,21 +1,16 @@
-package com.example.minseop.midasit.adapter;
+package com.example.minseop.midasit.ui.adapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.example.minseop.midasit.R;
 import com.example.minseop.midasit.model.MenuModel;
 
@@ -25,12 +20,12 @@ import java.util.List;
  * Created by minseop on 2018-05-26.
  */
 
-public class MenuItemRecyclerAdapter extends RecyclerView.Adapter<MenuItemRecyclerAdapter.MenuItemViewHolder>  {
+public class MenuItemRecyclerAdapter extends RecyclerView.Adapter<MenuItemRecyclerAdapter.MenuItemViewHolder> {
 
     List<MenuModel> items;
     Context context;
 
-    public MenuItemRecyclerAdapter(Context context, List<MenuModel> items){
+    public MenuItemRecyclerAdapter(Context context, List<MenuModel> items) {
         this.context = context;
         this.items = items;
     }
@@ -47,7 +42,7 @@ public class MenuItemRecyclerAdapter extends RecyclerView.Adapter<MenuItemRecycl
 
     @Override
     public void onBindViewHolder(@NonNull MenuItemViewHolder holder, int position) {
-        final MenuModel item =  items.get(position);
+        final MenuModel item = items.get(position);
 
 //        Glide.with(context).load(item.getImgResource()).into(holder.image);
         holder.title.setText(item.getName());
@@ -72,9 +67,9 @@ public class MenuItemRecyclerAdapter extends RecyclerView.Adapter<MenuItemRecycl
 
         public MenuItemViewHolder(View itemView) {
             super(itemView);
-            image = (ImageView) itemView.findViewById(R.id.image);
-            title = (TextView) itemView.findViewById(R.id.title);
-            price = itemView.findViewById(R.id.price);
+            image = (ImageView) itemView.findViewById(R.id.menuitem_card_image);
+            title = (TextView) itemView.findViewById(R.id.menuitem_card_title);
+            price = itemView.findViewById(R.id.menuitem_card_price);
             cardview = (CardView) itemView.findViewById(R.id.cardview);
         }
     }
