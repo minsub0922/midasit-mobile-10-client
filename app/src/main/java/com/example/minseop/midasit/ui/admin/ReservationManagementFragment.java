@@ -84,7 +84,7 @@ public class ReservationManagementFragment extends Fragment {
                         Log.d(TAG, "onFailure() called with: call = [" + call + "], t = [" + t + "]");
                     }
                 });
-        orderService.getAllCompleteds()
+        orderService.getAllCompletedOrders()
                 .enqueue(new Callback<OrderResponse>() {
                     @Override
                     public void onResponse(@NonNull Call<OrderResponse> call, @NonNull Response<OrderResponse> response) {

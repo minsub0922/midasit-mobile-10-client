@@ -2,6 +2,7 @@ package com.example.minseop.midasit.ui.customer;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -15,8 +16,9 @@ import android.widget.Switch;
 import com.example.minseop.midasit.MidasCafeApplication;
 import com.example.minseop.midasit.MidasCafeConstants;
 import com.example.minseop.midasit.R;
-import com.example.minseop.midasit.model.ShoppingCartItem;
-import com.example.minseop.midasit.retrofit.ShoppingCartService;
+import com.example.minseop.midasit.model.Order;
+import com.example.minseop.midasit.model.ResponseModel;
+import com.example.minseop.midasit.retrofit.OrderService;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -75,8 +77,6 @@ public class OrderActivity extends AppCompatActivity {
 
     private void setupButtons() {
         payNowButton = findViewById(R.id.order_pay_now_button);
-        storeShooppingButton = findViewById(R.id.order_store_shopping_cart_button);
-
         payNowButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,42 +84,39 @@ public class OrderActivity extends AppCompatActivity {
             }
         });
 
+        storeShooppingButton = findViewById(R.id.order_store_shopping_cart_button);
         storeShooppingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final int count = Integer.parseInt(countEditText.getText().toString());
+
                 final Retrofit retrofit = new Retrofit.Builder()
                         .baseUrl(MidasCafeConstants.SERVER_URL)
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
-                final ShoppingCartService ShoppingService = retrofit.create(ShoppingCartService.class);
+                retrofit.create(OrderService.class)
+                        .insertOrder(new Order(
+                                MidasCafeApplication.getInstance().getAuthModel().getId(),
+                                1,
+                                Order.ORDER_STATUS_SHOPPINGCART,
+                                count,
+                                iceSwitch.isChecked(),
+                                syrupSwitch.isChecked(),
+                                whippingSwitch.isChecked()
+                        ))
+                        .enqueue(new Callback<ResponseModel>() {
+                            @Override
+                            public void onResponse(@NonNull Call<ResponseModel> call, @NonNull Response<ResponseModel> response) {
+                                Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
 
-                countEditText = findViewById(R.id.order_count_editText);
+                                finish();
+                            }
 
-                ShoppingCartItem tmpshoppingCartItem = new ShoppingCartItem();
-                tmpshoppingCartItem.setMenuId(1);
-                tmpshoppingCartItem.setCount(Integer.parseInt(countEditText.getText().toString()));
-                tmpshoppingCartItem.setSize(size);
-                tmpshoppingCartItem.setWhipping(whipping);
-                tmpshoppingCartItem.setIce(ice);
-                tmpshoppingCartItem.setSyrup(syrup);
-
-                Log.d("int"," "+Integer.parseInt(countEditText.getText().toString()));
-
-               // final Call<ShoppingCartItem> ShoppingListCall = ShoppingService.addShoppingCartItem( MidasCafeApplication.getInstance().getAuthModel().getId(),tmpshoppingCartItem);
-
-                final Call<ShoppingCartItem> ShoppingListCall = ShoppingService.addShoppingCartItem( 1,tmpshoppingCartItem);
-                ShoppingListCall.enqueue(new Callback<ShoppingCartItem>() {
-                    @Override
-                    public void onResponse(Call<ShoppingCartItem> call, Response<ShoppingCartItem> response) {
-                        final ShoppingCartItem shoppingCartItem1 = response.body();
-                        Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
-                    }
-
-                    @Override
-                    public void onFailure(Call<ShoppingCartItem> call, Throwable t) {
-                        Log.d(TAG, "fail");
-                    }
-                });
+                            @Override
+                            public void onFailure(@NonNull Call<ResponseModel> call, @NonNull Throwable t) {
+                                Log.e(TAG, "onFailure: ", t);
+                            }
+                        });
             }
         });
 

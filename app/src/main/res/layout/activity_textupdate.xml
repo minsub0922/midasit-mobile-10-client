@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -21,6 +20,7 @@
             app:titleTextColor="@color/textColorDarkPrimary" />
 
     </android.support.design.widget.AppBarLayout>
+
     <LinearLayout
         app:layout_constraintTop_toBottomOf="@+id/textupdate_app_bar"
         android:layout_width="match_parent"
@@ -28,27 +28,28 @@
         android:layout_marginTop="10dp"
         android:padding="10dp"
         android:layout_height="wrap_content">
+
         <TextView
             android:id="@+id/txt_textupdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15dp"
             android:layout_marginBottom="10dp"
-            android:text="상품명"/>
+            android:text="상품명" />
+
         <EditText
             android:id="@+id/edt_textupdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="40dp"/>
+            android:layout_marginBottom="40dp" />
+
         <Button
             android:id="@+id/admin_textupdate_btn_submit"
             android:text="변경하기"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/Widget.AppCompat.Button.Colored"
-            />
+            style="@style/Widget.AppCompat.Button.Colored" />
     </LinearLayout>
-
 
 
 </android.support.constraint.ConstraintLayout>

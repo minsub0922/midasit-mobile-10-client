@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.example.minseop.midasit.R;
 import com.example.minseop.midasit.model.ReservationStatusModel;
 import com.example.minseop.midasit.ui.adapter.CustomerProfileRecyclerAdpater;
-import com.example.minseop.midasit.ui.adapter.CustomerShoppingCartRecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +41,8 @@ public class CustomerProfileFragment extends Fragment {
         txt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (recyclerView1.getVisibility()==View.GONE) recyclerView1.setVisibility(View.VISIBLE);
+                if (recyclerView1.getVisibility() == View.GONE)
+                    recyclerView1.setVisibility(View.VISIBLE);
                 else recyclerView1.setVisibility(View.GONE);
             }
         });
@@ -57,7 +57,8 @@ public class CustomerProfileFragment extends Fragment {
         txt2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (recyclerView2.getVisibility()==View.GONE) recyclerView2.setVisibility(View.VISIBLE);
+                if (recyclerView2.getVisibility() == View.GONE)
+                    recyclerView2.setVisibility(View.VISIBLE);
                 else recyclerView2.setVisibility(View.GONE);
             }
         });
@@ -65,11 +66,11 @@ public class CustomerProfileFragment extends Fragment {
         recyclerView2.setAdapter(adapter2);
         recyclerView2.setNestedScrollingEnabled(false);
 
-        modelList1.add(new ReservationStatusModel("HiHI", "", "24000","14일 금요일"));
-        modelList1.add(new ReservationStatusModel("HiHI", "", "24000","14일 금요일"));
-        modelList1.add(new ReservationStatusModel("HiHI", "", "24000","14일 금요일"));
-        modelList1.add(new ReservationStatusModel("HiHI", "", "24000","14일 금요일"));
-        modelList1.add(new ReservationStatusModel("HiHI", "", "24000","14일 금요일"));
+        modelList1.add(new ReservationStatusModel("HiHI", "", "24000", "14일 금요일"));
+        modelList1.add(new ReservationStatusModel("HiHI", "", "24000", "14일 금요일"));
+        modelList1.add(new ReservationStatusModel("HiHI", "", "24000", "14일 금요일"));
+        modelList1.add(new ReservationStatusModel("HiHI", "", "24000", "14일 금요일"));
+        modelList1.add(new ReservationStatusModel("HiHI", "", "24000", "14일 금요일"));
 
         adapter1.notifyDataSetChanged();
         return view;

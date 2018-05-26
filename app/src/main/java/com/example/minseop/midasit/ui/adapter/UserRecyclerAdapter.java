@@ -1,5 +1,6 @@
 package com.example.minseop.midasit.ui.adapter;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,16 +9,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.minseop.midasit.R;
-import com.example.minseop.midasit.user.User;
+import com.example.minseop.midasit.model.Account;
+import com.example.minseop.midasit.ui.admin.DetailUserManagementActivity;
 
 import java.util.List;
 
 public class UserRecyclerAdapter extends RecyclerView.Adapter<UserRecyclerAdapter.UserRecyclerViewHolder> {
 
-    private final List<User> users;
+    private final List<Account> accounts;
 
-    public UserRecyclerAdapter(@NonNull List<User> users) {
-        this.users = users;
+    public UserRecyclerAdapter(@NonNull List<Account> accounts) {
+        this.accounts = accounts;
     }
 
     @NonNull
@@ -30,26 +32,40 @@ public class UserRecyclerAdapter extends RecyclerView.Adapter<UserRecyclerAdapte
 
     @Override
     public void onBindViewHolder(@NonNull UserRecyclerViewHolder holder, int position) {
-        final User user = users.get(position);
+        final Account account = accounts.get(position);
 
-        holder.username.setText(user.getUsername());
-        holder.employeeNumber.setText(user.getEmployeeNumber());
+        holder.username.setText(account.getUsername());
+        holder.employeeNumber.setText(account.getEmployeeNumber());
+        holder.id = account.getId();
     }
 
     @Override
     public int getItemCount() {
-        return users.size();
+        return accounts.size();
     }
 
     static class UserRecyclerViewHolder extends RecyclerView.ViewHolder {
 
         private TextView username;
         private TextView employeeNumber;
+        int id;
 
-        public UserRecyclerViewHolder(View itemView) {
+        public UserRecyclerViewHolder(final View itemView) {
             super(itemView);
             username = itemView.findViewById(R.id.card_user_management_username);
             employeeNumber = itemView.findViewById(R.id.card_user_management_employee_number);
+
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(itemView.getContext(), DetailUserManagementActivity.class);
+                    intent.putExtra("username",username.getText().toString());
+                    intent.putExtra("employeenumber",employeeNumber.getText().toString());
+                    intent.putExtra("id",id);
+                    itemView.getContext().startActivity(intent);
+                }
+            });
         }
     }
 

@@ -1,19 +1,43 @@
 package com.example.minseop.midasit.retrofit;
 
-import com.example.minseop.midasit.model.UserResponseModel;
+import com.example.minseop.midasit.model.Account;
+import com.example.minseop.midasit.model.AccountResponse;
+import com.example.minseop.midasit.model.ResponseModel;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface AccountManagementService {
 
-    @GET("/management/account/customers")
-    Call<UserResponseModel> getAllCustomers();
+    @GET("/account/all")
+    Call<AccountResponse> getAllAccounts();
 
-    @GET("/management/account/admins")
-    Call<UserResponseModel> getAllAdmins();
+    @GET("/account/all/customer")
+    Call<AccountResponse> getAllCustomers();
 
-    @GET("/management/account/supervisers")
-    Call<UserResponseModel> getAllSupervisers();
+    @GET("/account/all/administrator")
+    Call<AccountResponse> getAllAdmins();
+
+    @GET("/account/all/superviser")
+    Call<AccountResponse> getAllSupervisers();
+
+    @POST("/account")
+    Call<ResponseModel> insertAccount(@Body Account account);
+
+//    @PUT("/account/password/userid/{userId}")
+//    Call<ResponseModel> updatePassword(@Path("userId") int userId);
+//
+//    @PUT("/account/username/userid/{userId}")
+//    Call<ResponseModel> updateUsername(@Path("userId") int userId);
+//
+//    @PUT("/account/admin/userid/{userId}")
+//    Call<ResponseModel> updateAdmin(@Path("userId") int userId);
+
+    @DELETE("/account/userid/{userId}")
+    Call<ResponseModel> deleteAccount(@Path("userId") int userId);
 
 }

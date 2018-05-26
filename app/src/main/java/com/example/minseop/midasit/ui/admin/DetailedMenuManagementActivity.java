@@ -1,19 +1,17 @@
 package com.example.minseop.midasit.ui.admin;
 
 import android.Manifest;
-import android.app.Activity;
-import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -30,22 +28,33 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.minseop.midasit.MidasCafeConstants;
 import com.example.minseop.midasit.R;
+import com.example.minseop.midasit.model.MenuCategory;
+import com.example.minseop.midasit.model.MenuModel;
+import com.example.minseop.midasit.model.ResponseModel;
+import com.example.minseop.midasit.retrofit.MenuService;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by minseop on 2018-05-26.
  */
 
-public class DetailedMenuManagementActivity extends AppCompatActivity implements View.OnClickListener{
+public class DetailedMenuManagementActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private static final String TAG = DetailedMenuManagementActivity.class.getSimpleName();
+
     private LinearLayout linearName, linearCategory, linearPrice;
     private ImageView imageView;
     private final int REQ_CAMERA_SELECT = 100;
-    int id ;
+    int id;
     private Button btn_submit;
     String price, category, name;
     TextView txt_name, txt_price, txt_category;
@@ -56,8 +65,8 @@ public class DetailedMenuManagementActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_menu_detail);
         Intent intent = getIntent();
-        id = intent.getIntExtra("id",-1);
-        price = String.valueOf( intent.getIntExtra("price",0));
+        id = intent.getIntExtra("id", -1);
+        price = String.valueOf(intent.getIntExtra("price", 0));
         category = intent.getStringExtra("category");
         name = intent.getStringExtra("name");
 
@@ -68,14 +77,14 @@ public class DetailedMenuManagementActivity extends AppCompatActivity implements
         btn_submit.setOnClickListener(this);
 
         txt_name = findViewById(R.id.txt_name_admin_menu_detail);
-        txt_category= findViewById(R.id.txt_category_admin_menu_detail);
-        txt_price= findViewById(R.id.txt_price_admin_menu_detail);
+        txt_category = findViewById(R.id.txt_category_admin_menu_detail);
+        txt_price = findViewById(R.id.txt_price_admin_menu_detail);
 
-        if (id == -1 ) {
+        if (id == -1) {
             type = 2;
-            category="";
-            name="";
-            price="";
+            category = "";
+            name = "";
+            price = "";
             btn_submit.setText("제품 추가하기");
         }
 
@@ -92,6 +101,7 @@ public class DetailedMenuManagementActivity extends AppCompatActivity implements
 
         setupAppBar();
     }
+
     private void setupAppBar() {
         Toolbar toolbar = findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
@@ -99,23 +109,23 @@ public class DetailedMenuManagementActivity extends AppCompatActivity implements
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            if (type==1) getSupportActionBar().setTitle("상품 정보 변경하기");
-            else if(type ==2) getSupportActionBar().setTitle("상품 추가 하기");
+            if (type == 1) getSupportActionBar().setTitle("상품 정보 변경하기");
+            else if (type == 2) getSupportActionBar().setTitle("상품 추가 하기");
         }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (type==1) getMenuInflater().inflate(R.menu.toolbar_admin_menu_detail, menu);
+        if (type == 1) getMenuInflater().inflate(R.menu.toolbar_admin_menu_detail, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         final int itemId = item.getItemId();
-        if (itemId == android.R.id.home){
+        if (itemId == android.R.id.home) {
             finish();
-        }else if (itemId == R.id.toolbar_action_trash) {
+        } else if (itemId == R.id.toolbar_action_trash) {
             //delete in DB
             AlertDialog.Builder builder = new AlertDialog.Builder(DetailedMenuManagementActivity.this);
             builder.setTitle("영구 삭제하시겠습니까 ?");
@@ -142,10 +152,10 @@ public class DetailedMenuManagementActivity extends AppCompatActivity implements
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.img_admin_menu_detail){
+        if (v.getId() == R.id.img_admin_menu_detail) {
 
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED) {
-                if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
 
                 } else {
                     ActivityCompat.requestPermissions(this,
@@ -160,16 +170,44 @@ public class DetailedMenuManagementActivity extends AppCompatActivity implements
             startActivityForResult(intent, REQ_CAMERA_SELECT);
 
 
-        }else if (v.getId() == R.id.btn_admin_menu_detail_submit){
+        } else if (v.getId() == R.id.btn_admin_menu_detail_submit) {
             //DB 작업 및 액티비티 종료
 
-            if (type==1){   //갱신
+            if (type == 1) {   //갱신
 
-            }else if (type==2){ //추가
+            } else if (type == 2) { //추가
+                final String name = txt_name.getText().toString();
+                final MenuCategory category = MenuCategory.COFFEE;
+                final int price = Integer.parseInt(txt_price.getText().toString());
 
+                MenuModel menuModel = new MenuModel();
+                menuModel.setName(name);
+                menuModel.setCategory(category);
+                menuModel.setPrice(price);
+                if (imageView != null && imageView.getDrawable() != null) {
+                    final String encodedImage = getBase64(imageView.getDrawable());
+                    menuModel.setImage(encodedImage);
+                }
+
+                final Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl(MidasCafeConstants.SERVER_URL)
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+                retrofit.create(MenuService.class)
+                        .insertMenu(menuModel)
+                        .enqueue(new Callback<ResponseModel>() {
+                            @Override
+                            public void onResponse(@NonNull Call<ResponseModel> call, @NonNull Response<ResponseModel> response) {
+                                Log.d(TAG, "onResponse() called with: call = [" + call + "], response = [" + response + "]");
+                            }
+
+                            @Override
+                            public void onFailure(@NonNull Call<ResponseModel> call, @NonNull Throwable t) {
+                                Log.e(TAG, "onFailure: ", t);
+                            }
+                        });
             }
-        }
-        else {
+        } else {
             Intent intent = new Intent(DetailedMenuManagementActivity.this, TextUpdateActivity.class);
             int reqCode = 0;
             if (v.getId() == R.id.linear_name_admin_menu_detail) {
@@ -192,47 +230,48 @@ public class DetailedMenuManagementActivity extends AppCompatActivity implements
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
-            if(resultCode == RESULT_OK){
-                String result=data.getStringExtra("result");
-                Log.d("Success????",result);
+            if (resultCode == RESULT_OK) {
+                String result = data.getStringExtra("result");
+                Log.d("Success????", result);
                 txt_name.setText(result);
             }
-        }else if (requestCode == 2){
-            if (resultCode == RESULT_OK){
+        } else if (requestCode == 2) {
+            if (resultCode == RESULT_OK) {
                 String result = data.getStringExtra("result");
                 txt_category.setText(result);
             }
-        }else if (requestCode == 3){
-            if (resultCode ==   RESULT_OK){
+        } else if (requestCode == 3) {
+            if (resultCode == RESULT_OK) {
                 String result = data.getStringExtra("result");
                 txt_price.setText(result);
             }
-        }else if (requestCode == 100){
-                if (resultCode == RESULT_OK){
-                    try{
-                        Glide.with(this).load(getRealPathFromURI(data.getData())).into(imageView);
-                        getBase64(imageView.getDrawable());
-                    }catch (Exception e){}
+        } else if (requestCode == 100) {
+            if (resultCode == RESULT_OK) {
+                try {
+                    Glide.with(this).load(getRealPathFromURI(data.getData())).asBitmap().into(imageView);
+                    getBase64(imageView.getDrawable());
+                } catch (Exception e) {
+                    Log.e(TAG, "onActivityResult: ", e);
                 }
+            }
         }
     }
 
     private String getRealPathFromURI(Uri contentUri) {
-        int column_index=0;
+        int column_index = 0;
         String[] proj = {MediaStore.Images.Media.DATA};
         Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
-        if(cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
         }
         return cursor.getString(column_index);
     }
 
-    private String getBase64(Drawable drawable){
+    private String getBase64(Drawable drawable) {
         Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-        byte[] byteArray = byteArrayOutputStream .toByteArray();
-        String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
-        return encoded;
+        byte[] byteArray = byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
 }

@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.example.minseop.midasit.R;
 import com.example.minseop.midasit.model.HomeAdModel;
-import com.example.minseop.midasit.model.ReservationStatusModel;
 
 import java.util.List;
 
