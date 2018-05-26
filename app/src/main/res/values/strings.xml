@@ -15,4 +15,9 @@
     <string name="count">수량</string>
     <string name="pay_now">즉시 결제</string>
     <string name="store_shopping_cart">장바구니 담기</string>
+    <string name="password">비밀번호</string>
+    <string name="employee_number">사원 번호</string>
+    <string name="signin">로그인</string>
+    <string name="failed_to_signin">로그인을 실패하였습니다.</string>
+    <string name="incorrect_password">사원 번호 및 비밀번호가 올바르지 않습니다.</string>
 </resources>
